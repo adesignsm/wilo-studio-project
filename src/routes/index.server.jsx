@@ -1,25 +1,59 @@
+import { Link, Image, gql, useShopQuery, CacheLong } from "@shopify/hydrogen";
 import Layout from "../components/Layout.server";
-import HOMELANDING_HOME from "../assets/HOMELANDING_HOME.jpg"
-import HOMELANDING_SKIN from "../assets/HOMELANDING_SKIN.png"
-import LANDING_VID from "../assets/WEB-LANDING_VID.mp4"
 
-export default function Home() {
+import LANDING_VID from "../assets/WEB-LANDING_VID.mp4";
+
+const Home = () => {
+  const {
+      data: { collections },
+  } = useShopQuery({
+      query: QUERY,
+      cache: CacheLong(),
+      preload: true,
+  });
+
   return (
     <Layout>
-      <div className="home-page container">
+      <section className="home-page container">
         <div className="homepage-image-container">
-            <img src={HOMELANDING_HOME} alt="Home Landing" />
-            <img src={HOMELANDING_SKIN} alt="Skin Landing" />
-        <video autoPlay loop muted>
+          {collections.nodes.map((collection) => {
+            return (
+              <Link key={collection.id} to={`/collections/${collection.handle}`}>
+                {collection?.image && (
+                  <Image className="" alt={`Image of ${collection.title}`} data={collection.image} />
+                )}
+              </Link>
+            );
+          })}
+
+          <video autoPlay loop muted>
             <source src={LANDING_VID} type="video/mp4" />
             Your browser does not support the video tag.
-        </video>
+          </video>
         </div>
         <p>A collection of self-care products to create a tranquil environment 
           where rest and relaxation can take place.
         </p>
         <br/> 
-      </div>
+      </section>
     </Layout>
   );
 }
+
+export default Home;
+
+const QUERY = gql`
+  query {
+    collections(first: 2, sortKey: UPDATED_AT) {
+      nodes {
+        id
+        title
+        handle
+        image {
+          altText
+          url
+        }
+      }
+    }
+  }
+`;

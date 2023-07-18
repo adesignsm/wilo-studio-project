@@ -33,13 +33,17 @@ const ShopAll = () => {
             return (
               <Link key={product.handle} to={`/products/${product.handle}`}>
                 {product?.media?.edges[0]?.node?.previewImage?.url && (
-                  <div>
-                    <Image className="" alt={`Image of ${product.title}`} src={product.media.edges[0].node.previewImage.url}
-                      height={product.media.edges[0].node.previewImage.height}
-                      width={product.media.edges[0].node.previewImage.width}
+                  <div className="all-products-grid-container">
+                    <Image className="" 
+                    alt={`Image of ${product.title}`} 
+                    src={product.media.edges[0].node.previewImage.url}
+                    height={product.media.edges[0].node.previewImage.height}
+                    width={product.media.edges[0].node.previewImage.width}
                     />
+                    <div className="all-products-info">
                     <h3>{product.title}</h3>
                     <h3>${price}0</h3>
+                    </div>
                   </div>
                 )}
               </Link>

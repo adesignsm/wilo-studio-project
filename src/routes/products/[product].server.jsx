@@ -4,10 +4,7 @@ import {
   useShopQuery, 
   useServerAnalytics, 
   ShopifyAnalyticsConstants, 
-  Seo, 
-  BuyNowButton,
-  AddToCartButton, 
-  useProductOptions } from "@shopify/hydrogen";
+  Seo } from "@shopify/hydrogen";
 import { Suspense } from "react";
 import Layout from "../../components/Layout.server";
 
@@ -68,8 +65,6 @@ const Product = ({ params }) => {
                         ))}
                         </ul>
                     )}
-                </div>
-                <div className="buy-button-container">
                 </div>
               </>
             ) : (

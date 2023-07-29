@@ -4,11 +4,7 @@ import {
   useShopQuery, 
   useServerAnalytics, 
   ShopifyAnalyticsConstants, 
-  Seo,
-  CartProvider, 
-  BuyNowButton,
-  AddToCartButton, 
-  useProductOptions } from "@shopify/hydrogen";
+  Seo } from "@shopify/hydrogen";
 import { Suspense } from "react";
 import Layout from "../../components/Layout.server";
 
@@ -70,11 +66,6 @@ const Product = ({ params }) => {
                         </ul>
                     )}
                 </div>
-                <CartProvider>
-                <div className="buy-button-container">
-                  <AddToCartButton>Add</AddToCartButton>
-                </div>
-                </CartProvider>
               </>
             ) : (
               <p>No product found</p>

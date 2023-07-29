@@ -4,7 +4,8 @@ import {
   useShopQuery, 
   useServerAnalytics, 
   ShopifyAnalyticsConstants, 
-  Seo, 
+  Seo,
+  CartProvider, 
   BuyNowButton,
   AddToCartButton, 
   useProductOptions } from "@shopify/hydrogen";
@@ -69,8 +70,11 @@ const Product = ({ params }) => {
                         </ul>
                     )}
                 </div>
+                <CartProvider>
                 <div className="buy-button-container">
+                  <AddToCartButton>Add</AddToCartButton>
                 </div>
+                </CartProvider>
               </>
             ) : (
               <p>No product found</p>
@@ -116,5 +120,3 @@ const PRODUCT_QUERY = gql`
     }
   }
 `;
-
-

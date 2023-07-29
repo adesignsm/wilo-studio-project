@@ -10,6 +10,7 @@ const HomeGoods = () => {
     cache: CacheLong(),
     preload: true,
   });
+ 
 
   const { products } = collection || {};
 

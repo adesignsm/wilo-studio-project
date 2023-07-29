@@ -15,14 +15,20 @@ const Home = () => {
   return (
     <Layout>
       <section className="home-page container">
-        <div className="homepage-image-container">
+
+          <div className="collections-container">
           {collections.nodes.map((collection) => {
             return (
-              <Link key={collection.id} to={`/collections/${collection.handle}`}>
-                {collection?.image && (
-                  <Image className="" alt={`Image of ${collection.title}`} data={collection.image} />
-                )}
+              <div key={collection.id} className="collection-item">
+              <Link to={`/collections/${collection.handle}`}>
+                  {collection?.image && (
+                    <div className="collection-content">
+                  <Image className="collection-image" alt={`Image of ${collection.title}`} data={collection.image} />
+                  <button className="collection-button">{collection.handle}</button>
+                    </div>
+                    )}
               </Link>
+            </div>
             );
           })}
 
@@ -30,7 +36,7 @@ const Home = () => {
             <source src={LANDING_VID} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-        </div>
+          </div>
         <p>A collection of self-care products to create a tranquil environment 
           where rest and relaxation can take place.
         </p>

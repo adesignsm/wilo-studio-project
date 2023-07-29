@@ -9,6 +9,7 @@ const ShopAll = () => {
     preload: true,
   });
 
+
   const { products } = data || {};
   const { edges: productEdges, pageInfo } = products || {};
 

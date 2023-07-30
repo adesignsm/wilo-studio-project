@@ -1,0 +1,13 @@
+.policy-container {
+    display: flex;
+}
+
+.left-div {
+    flex: 0 0 30%;
+    padding: 2rem;
+  }
+  
+  .right-div {
+    flex: 0 0 70%;
+    padding: 2rem 2rem;
+  }

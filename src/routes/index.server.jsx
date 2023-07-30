@@ -1,6 +1,5 @@
 import { Link, Image, gql, useShopQuery, CacheLong } from "@shopify/hydrogen";
 import Layout from "../components/Layout.server";
-
 import LANDING_VID from "../assets/WEB-LANDING_VID.mp4";
 
 const Home = () => {

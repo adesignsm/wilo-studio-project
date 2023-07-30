@@ -1,5 +1,6 @@
 import { useShopQuery, CacheLong, gql, Seo, Link } from "@shopify/hydrogen";
 import { Suspense } from "react";
+import Footer from "./Footer.server";
 
 const Layout = ({ children }) => {
 
@@ -36,29 +37,7 @@ const Layout = ({ children }) => {
       <main>
         <Suspense>{children}</Suspense>
       </main>
-      <footer className="footer">
-        <ul className="legal">
-          <li> Legal </li>
-          <li> Terms of Service </li>
-          <li> Privacy policy </li>
-        </ul>
-        <ul className="inquiry">
-          <li> Assistance </li>
-          <li> Ordering </li>
-          <li> Shipping information </li>
-          <li> Returns & Exchanges </li>
-        </ul>
-        <ul className="comapny">
-          <li> Comapny </li>
-          <li> About </li>
-          <li> Contact Us </li>
-        </ul>
-        <ul className="socials">
-          <li> Instagram </li>
-          <li> Facebook </li>
-          <li> TikTok </li>
-        </ul>
-      </footer>
+      <Footer/>
     </>
   );
 }

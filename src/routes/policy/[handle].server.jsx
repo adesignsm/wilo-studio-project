@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { useShopQuery, gql, useRouteParams, Link } from '@shopify/hydrogen';
 import Layout from "../../components/Layout.server";
 import "../../styles/policy.css";
+import leftArrow from "../../assets/leftArrow.svg";
 
 const PolicyPage = ({params}) => {
   return (
@@ -28,10 +29,11 @@ const PolicyContent = ({params}) => {
 
   return (
     <Layout>
-      <section className="policy-container">
+      <section >
+        <div className="policy-container">
         <div className='left-div'>
           <h1>{policy.title || 'Policy not found'}</h1>
-        <Link to="/">Go Back</Link> 
+        <Link to="/"><img src={leftArrow}/></Link> 
         </div>
         <div className='right-div'>
         {loading ? (
@@ -48,6 +50,7 @@ const PolicyContent = ({params}) => {
               )}
           </>
         )}
+        </div>
         </div>
       </section>
     </Layout>

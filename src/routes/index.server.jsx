@@ -11,6 +11,7 @@ const Home = () => {
       preload: true,
   });
 
+  
   return (
     <Layout>
       <section className="home-page container">
@@ -22,7 +23,12 @@ const Home = () => {
               <Link to={`/collections/${collection.handle}`}>
                   {collection?.image && (
                     <div className="collection-content">
-                  <Image className="collection-image" alt={`Image of ${collection.title}`} data={collection.image} />
+                  <Image className="collection-image" 
+                  alt={`Image of ${collection.title}`} 
+                  data={collection.image}
+        
+                  />
+
                   <button className="collection-button">{collection.handle}</button>
                     </div>
                     )}

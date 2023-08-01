@@ -13,7 +13,7 @@
     --product-item-padding: 15px;
     --standard-font-size: 19px;
     --menu-link-item-color: #636366;
-    --standard-font: Helvetica Neue,Helvetica,Arial,sans-serif;
+    --standard-font: 'NeueHaasDisplayThin',Helvetica,Arial,sans-serif;
   }
 
 body {
@@ -26,9 +26,6 @@ body {
 .container {
     padding-right: var(--padding);
     padding-left: var(--padding);
-    /* margin-right: auto;
-    margin-left: auto;
-    max-width: 1120px; */
 }
 
 .skeleton {
@@ -117,7 +114,6 @@ main {
     min-height: 300px;
 }
 .home-page {
-    /* padding-top: 15px; */
     display: flex;
     align-items: center;
     justify-content: center;

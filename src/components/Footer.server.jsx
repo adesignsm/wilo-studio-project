@@ -1,5 +1,6 @@
 import { gql, useShopQuery, CacheLong, Link } from "@shopify/hydrogen";
-import arrow from "../assets/iwwa_arrow-right.svg";
+import rightArrow from "../assets/rightArrow.svg";
+
 
 const Footer = () => {
 
@@ -14,6 +15,7 @@ const Footer = () => {
 
     
     return (
+
         <footer className="footer">
 
             <ul className="legal">
@@ -46,7 +48,7 @@ const Footer = () => {
                 <form>
                     <input placeholder="EMAIL" />
                     <button>
-                        <img src={arrow} />
+                        <img src={rightArrow} />
                     </button>
                 </form>
                 <p>I'd like to sign up to the WILO STUDIO newsletter. <br />

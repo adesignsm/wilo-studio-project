@@ -32,6 +32,7 @@ const Layout = ({ children }) => {
                     <li><Link to='pages/ingredients'>INGREDIENTS</Link></li>
                 </ul>
                 </div>
+                <Link to="/pages/Cart" className="header-cart-link">CART</Link>
             </div>
         </header>
       <main>

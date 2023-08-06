@@ -74,6 +74,7 @@ const PRODUCT_QUERY = gql`
         edges {
           node {
             id
+            availableForSale
             priceV2 {
               amount
               currencyCode

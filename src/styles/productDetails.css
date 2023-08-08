@@ -6,7 +6,7 @@
   }
 
 .product-name, .product-media {
-    flex: 1 0 auto;
+    flex: 1 0 50%;
   }
 
 
@@ -44,6 +44,10 @@
 }
 
 .add-to-cart-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .add-to-cart
@@ -54,6 +58,8 @@
     border-radius: 25px; 
     color: var(--menu-link-item-color);
     border: 1px solid var(--menu-link-item-color);
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .add-to-cart[disabled] {
@@ -61,13 +67,73 @@
     cursor: none;
 }
 
+.cart-quantity-selector {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 90px;
+    background-color: transparent;
+}
+
+.cart-quantity-selector span {
+    width: 100%;
+    min-width: 20px;
+    text-align: center;
+    user-select: none;
+    font-weight: 700;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+}
+
+.cart-quantity-selector button {
+    background-color: transparent;
+    border: none;
+    position: relative;
+    display: block;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    outline: none;
+    cursor: pointer; 
+}
+
+.cart-quantity-selector button svg {
+    stroke: var(--menu-link-item-color);
+    width: 25px;
+    height: 25px;
+}
+
+
+
+
+
 @media screen and (max-width: 768px) {
     .product-container {
       flex-direction: column;
     }
   
-    .product-name, .product-media {
-      flex: none;
-      width: 100%;
-    }
   }
+
+
+@media (max-width: 640px) {
+        .product-container,
+        .add-to-cart-container
+         {
+          flex-direction: column;  /* Stack children vertically */
+          align-items: center;     /* Center children horizontally */
+          justify-content: center; /* Center children vertically */
+        }
+      
+        /* Ensure full width for child components */
+        .product-name,
+        .product-media,
+        .product-details,
+        .add-to-cart,
+        .cart-quantity-selector button {
+          width: 100%;
+          text-align: center;      /* Text center for block elements */
+        }
+}

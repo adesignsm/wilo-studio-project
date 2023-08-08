@@ -239,51 +239,14 @@ main {
 .line-item-variant span:not(:last-child) {
     margin-right: 5px;
 }
-.cart-quantity-selector {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    border: 2px solid rgb(211, 212, 213);
-    width: 90px;
-    background-color: white;
-}
-.cart-quantity-selector span {
-    width: 100%;
-    min-width: 20px;
-    text-align: center;
-    user-select: none;
-    font-weight: 700;
-    font-size: 12px;
-    color: rgb(33, 42, 47);
-}
-.cart-quantity-selector button {
-    position: relative;
-    display: block;
-    appearance: none;
-    border: none;
-    text-align: center;
-    padding: 0px;
-    margin: 0px;
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
-    background-color: rgb(255, 255, 255);
-    outline: none;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-.cart-quantity-selector button svg {
-    stroke: rgb(211, 212, 213);
-    width: 25px;
-    height: 25px;
-}
+
 .cart-remove {
     width: 25px;
     height: 25px;
     height: auto;
     cursor: pointer;
 }
+
 .cart-remove svg {
     stroke: rgb(211, 212, 213);
 }

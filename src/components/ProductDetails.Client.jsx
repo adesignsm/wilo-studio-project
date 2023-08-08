@@ -1,73 +1,102 @@
 import { 
-useProductOptions,
-AddToCartButton, 
-ProductOptionsProvider,
-ProductPrice,
-CartLineProvider,
-useCart,
-CartLineQuantityAdjustButton,
-CartLineQuantity
-} from "@shopify/hydrogen";
-import "../styles/productDetails.css";
-
-const ProductDetails = ({ product }) => {
+  useProductOptions,
+  AddToCartButton, 
+  ProductOptionsProvider,
+  ProductPrice,
+  CartLineProvider,
+  useCart,
+  CartLineQuantityAdjustButton,
+  CartLineQuantity
+  } from "@shopify/hydrogen";
+  import "../styles/productDetails.css";
   
-  return (
-    <ProductOptionsProvider data={product}>
-    <ProductForm product={product}/>
-    </ProductOptionsProvider>
-  )
+  const ProductDetails = ({ product }) => {
+    
+    return (
+      <ProductOptionsProvider data={product}>
+        <ProductForm product={product}/>
+      </ProductOptionsProvider>
+    )
+  };
   
-};
+  const ProductForm = ({ product }) => {
+    console.log(product);
+    
+    const { selectedVariant, setSelectedOption } = useProductOptions();
+    const isOutOfStock = !selectedVariant?.availableForSale || false;
+    const { lines } = useCart();
+    const firstLine = lines[0]; // Assuming you want to adjust the quantity of the first line in the cart.
 
-const ProductForm = ({product}) => {
-  console.log(product);
   
-  const { selectedVariant, setSelectedOption } = useProductOptions();
-
-  const isOutOfStock = !selectedVariant?.availableForSale || false;
-
-  const {lines} = useCart();
-
-  return (
-    <>
-       <div className="product-container">
-        <div className="product-name">
-          <h1>{product.title}</h1>
-          <div className="product-details">
-            <p>Info</p>
-            <p>{product.description}</p>
+    return (
+      <>
+        <div className="product-container">
+          <div className="product-name">
+            <h1>{product.title}</h1>
+            <div className="product-details">
+              <p>Info</p>
+              <p>{product.description}</p>
+            </div>
+            <ProductPrice 
+              className="product-page-price" 
+              withoutTrailingZeros
+              data={product}
+              variantId={selectedVariant.id}
+            />
+            <div className="add-to-cart-container">
+                <div className="add-to-cart-box">
+                  <AddToCartButton disabled={isOutOfStock} className="add-to-cart" >
+                    {isOutOfStock ? 'Out of stock' : 'Add to cart'}
+                   </AddToCartButton>
+                </div>
+                  <div className="qty-box">
+                      {firstLine && (
+                          <CartLineProvider key={firstLine.id} line={firstLine}>
+                              <CartLineQuantityAdjust />
+                          </CartLineProvider>
+                      )}
+                    </div>
+            </div>
           </div>
-          <ProductPrice 
-            className="product-page-price" 
-            withoutTrailingZeros
-            data={product}
-            variantId={selectedVariant.id}
-          />
-          <div className="add-to-cart-container">
-          <AddToCartButton disabled={isOutOfStock} className="add-to-cart" >
-        {isOutOfStock ? 'Out of stock' : 'Add to cart'}
-          </AddToCartButton>
-        </div>
+  
+          <div className="product-media">
+            {product.images && product.images.edges && (
+              <ul>
+                {product.images.edges.map(({ node }) => (
+                  <li key={node.url}>
+                    <img src={node.url} alt="" width={node.width} height={node.height} />
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-
-
-        <div className="product-media">
-          {product.images && product.images.edges && (
-            <ul>
-              {product.images.edges.map(({ node }) => (
-                <li key={node.url}>
-                  <img src={node.url} alt="" width={node.width} height={node.height} />
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
-      </div>
+      </>
+    );
+  };
+  
+  export default ProductDetails;
+  
+  const CartLineQuantityAdjust = () => {
 
-                    </>
-        
-  );
-};
 
-export default ProductDetails;
+    
+    return (
+      <>
+       <div className="cart-quantity-selector">
+                <CartLineQuantityAdjustButton adjust="decrease">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15" />
+                    </svg>
+                </CartLineQuantityAdjustButton>
+                <CartLineQuantity />
+                <CartLineQuantityAdjustButton adjust="increase">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                </CartLineQuantityAdjustButton>
+            </div>
+      </>
+    );
+  };
+    

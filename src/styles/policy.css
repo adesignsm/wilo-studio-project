@@ -5,11 +5,19 @@
 }
 
 .left-div {
-    flex: 0 0 30%;
-    padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 30%;
+  padding: 2rem;
   }
   
   .right-div {
     flex: 0 0 70%;
     padding: 2rem 2rem;
   }
+
+.policy-links {
+  text-decoration: none;
+  color: var(--menu-link-item-color);
+  padding-bottom: 0.5rem;
+}

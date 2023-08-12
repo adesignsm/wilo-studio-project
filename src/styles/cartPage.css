@@ -1,0 +1,139 @@
+.cart-container {
+   position: relative;
+}
+
+.cart-table {
+    width: 80%;
+}
+
+
+.cart-table tbody {
+    width: auto;     
+}
+
+.cart-table tr {
+    padding: 0 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-table tr:last-child {
+    font-weight: bold;
+    align-items: flex-end;
+}
+
+.cart-table tr:last-child td {
+    padding-top: 15px;
+}
+
+.cart-table tr td:first-child {
+    width: 300px;
+}
+
+.cart-table tr td:nth-child(2) {
+    text-align: left;
+}
+
+.cart-table tr td:last-child {
+    position: relative;
+    text-align: right;
+}
+
+.cart-table tr td:last-child .cart-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.cart-footer {
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px; 
+}
+
+.checkout-button {
+    text-transform: uppercase;
+    margin-top: auto; 
+    background-color: transparent; 
+    border-radius: 25px; 
+    color: var(--menu-link-item-color);
+    border: 1px solid var(--menu-link-item-color);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0 10px;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    border-color: black;
+}
+
+
+.line-item-image {
+max-width: 250px;
+height: auto;
+mix-blend-mode: multiply;
+}
+
+.line-item-image.skeleton {
+    width: 250px;
+    height: 200px;
+}
+
+.line-item-variant span:not(:last-child) {
+    margin-right: 5px;
+}
+
+.line-item-product-title {
+    text-decoration: none;
+    color: black;
+}
+
+.cart-quantity-selector {
+
+}
+
+.cart-remove {
+    width: 1.5rem;
+    height: 1.5rem;
+    height: auto;
+    cursor: pointer;  
+}
+
+.cart-remove svg {
+    stroke: rgb(211, 212, 213);
+}
+
+
+
+/* CSS for mobile screens */
+@media (max-width: 640px) { /* This breakpoint is for tablet screens. Adjust as necessary. */
+    .cart-table tr {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* To align the content to the start */
+        margin-bottom: 1rem;
+    }
+
+    .cart-table td {
+        /* Optional: reset other styles for better mobile appearance */
+        width: 100%!important;
+        box-sizing: border-box;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Resetting the border style for the last child */
+    .cart-table tr:last-child td {
+        border-top: none;
+        padding-top: 0;
+    }
+
+    .cart-table tr td:last-child .cart-remove {
+        position: static; /* Resetting the position */
+        float: none;      /* Removing the float */
+        align-self: flex-end; /* Positioning it to the end of the flex container */
+    }
+}

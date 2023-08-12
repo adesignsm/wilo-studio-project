@@ -89,11 +89,7 @@ header {
 .header-cart-link {
     width: 150px;
 }
-.cart-footer {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 20px;
-}
+
 .header-cart-link {
     display: flex;
     align-items: center;
@@ -192,63 +188,6 @@ main {
 .product-compare-at-price {
     text-decoration: line-through;
     color: var(--menu-link-item-color);
-}
-.cart-table {
-    width: 100%;
-}
-.cart-table tr:last-child {
-    font-weight: bold;
-}
-.cart-table tr:last-child td {
-    border-top: 1px solid rgb(211, 212, 213);
-    padding-top: 15px;
-}
-.cart-table tr td:first-child {
-    width: 300px;
-}
-.cart-table tr td:nth-child(2) {
-    text-align: left;
-}
-.cart-table tr td:last-child {
-    position: relative;
-    text-align: right;
-}
-.cart-table tr td:last-child .cart-remove {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-.line-item-product-title {
-    text-decoration: none;
-    color: black;
-}
-.line-item-image {
-    max-width: 250px;
-    height: auto;
-    mix-blend-mode: multiply;
-}
-.line-item-image.skeleton {
-    width: 250px;
-    height: 200px;
-}
-.line-item-variant {
-    color: var(--menu-link-item-color);
-    font-size: 80%;
-    margin-bottom: 15px;
-}
-.line-item-variant span:not(:last-child) {
-    margin-right: 5px;
-}
-
-.cart-remove {
-    width: 25px;
-    height: 25px;
-    height: auto;
-    cursor: pointer;
-}
-
-.cart-remove svg {
-    stroke: rgb(211, 212, 213);
 }
 
 .product-option-group {
@@ -398,6 +337,30 @@ footer {
 .footer p {
     font-size: 0.5em;
 }
+
+.subscription input {
+    border: none; /* Remove all borders */
+    border-bottom: 1px solid #000; /* Add only the bottom border */
+    outline: none; /* Remove focus outline */
+    padding: 5px 0; /* Add some padding to give space around the text inside the input field */
+    font-size: 0.7em;
+}
+
+
+
+.subscription input:focus {
+    border-bottom-color: var(--menu-link-item-color); /* Change color on focus (or any color you prefer) */
+    transition: border-bottom-color 0.3s ease; /* Smooth transition for color change */
+}
+
+.subscription button {
+border: none;
+background-color: transparent;
+}
+
+.subscription button img {
+    width: 1rem;
+    }
 
 
   

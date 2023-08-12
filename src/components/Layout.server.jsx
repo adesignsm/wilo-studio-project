@@ -1,6 +1,7 @@
 import { useShopQuery, CacheLong, gql, Seo, Link } from "@shopify/hydrogen";
 import { Suspense } from "react";
 import Footer from "./Footer.server";
+import CartBubble from "./CartBubble.client";
 
 const Layout = ({ children }) => {
 
@@ -32,7 +33,9 @@ const Layout = ({ children }) => {
                     <li><Link to='pages/ingredients'>INGREDIENTS</Link></li>
                 </ul>
                 </div>
-                <Link to="/pages/Cart" className="header-cart-link">CART</Link>
+                <Link to="/pages/Cart" className="header-cart-link">CART
+                <CartBubble/>
+                </Link>
             </div>
         </header>
       <main>

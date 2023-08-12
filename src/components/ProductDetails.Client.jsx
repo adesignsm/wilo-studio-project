@@ -10,7 +10,7 @@ import {
   } from "@shopify/hydrogen";
   import "../styles/productDetails.css";
   
-  const ProductDetails = ({ product }) => {
+  const ProductDetails = ({ product }) => { 
     
     return (
       <ProductOptionsProvider data={product}>

@@ -1,6 +1,8 @@
 
 import Layout from "../../components/Layout.server";
 import "../../styles/ingredients.css";
+import Cube from "../../components/Cube.client";
+
 
 const Ingredients = () => {
 
@@ -9,6 +11,7 @@ const Ingredients = () => {
         <>
             <Layout>
                 <h1> Ingredients TEST </h1>
+                <Cube/>
             </Layout>
         </>
     )

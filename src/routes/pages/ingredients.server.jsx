@@ -1,7 +1,7 @@
 
 import Layout from "../../components/Layout.server";
 import "../../styles/ingredients.css";
-import Cube from "../../components/Cube.client";
+import IngredientsSphere from "../../components/IngredientsSphere.client";
 
 
 const Ingredients = () => {
@@ -10,8 +10,7 @@ const Ingredients = () => {
     return (
         <>
             <Layout>
-                <h1> Ingredients TEST </h1>
-                <Cube/>
+                <IngredientsSphere />
             </Layout>
         </>
     )

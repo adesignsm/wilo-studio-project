@@ -16,11 +16,12 @@
     --standard-font: 'NeueHaasDisplayThin',Helvetica,Arial,sans-serif;
   }
 
-body {
+body, html {
     margin: 0;
     padding: 0;
     font-family: var(--standard-font);
     font-size: var(--standard-font-size);
+    user-select: none;
 
 }
 

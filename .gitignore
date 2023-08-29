@@ -1,6 +1,14 @@
+# Ignore node modules
+node_modules/
 
-node_modules
+# Ignore MacOS system files
 .DS_Store
-dist
+
+# Ignore build files
+dist/
+
+# Ignore local files
 *.local
-        
+
+# Ignore environment files
+.env

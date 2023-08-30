@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'NeueHaasDisplayThin';
-    src: url(./assets/NeueHaasDisplayThin.ttf);
+    src: url("../assets/NeueHaasDisplayThin.ttf");
 }
 
 
@@ -11,7 +11,7 @@
     --product-item-padding: 15px;
     --standard-font-size: 19px;
     --menu-link-item-color: #636366;
-    --standard-font: 'NeueHaasDisplayThin',Helvetica,Arial,sans-serif;
+    --standard-font: 'NeueHaasDisplayThin';
   }
 
 body, html {
@@ -126,7 +126,7 @@ main {
     font-weight: 400;
     font-size: 4em;
     line-height: 1em;
-    font-family: 'NeueHaasDisplayThin', sans-serif;
+    font-family: var(--standard-font);
 }
 .catalog-page {
     padding-top: 10px;

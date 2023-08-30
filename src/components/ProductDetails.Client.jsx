@@ -78,9 +78,6 @@ import {
   export default ProductDetails;
   
   const CartLineQuantityAdjust = () => {
-
-
-    
     return (
       <>
        <div className="cart-quantity-selector">

@@ -5,8 +5,6 @@ import IngredientsSphere from "../../components/IngredientsSphere.client";
 
 
 const Ingredients = () => {
-
-    
     return (
         <>
             <Layout>

@@ -34,19 +34,19 @@ const Product = ({ params }) => {
     <Layout>
       <Suspense>
         <Seo type="product" data={product} />
-      <section className="">
-        {loading ? (
-          <p>Loading...</p>
-          ) : (
-            <>
-            {product ? (
-              <ProductDetails product={product}/>
-              ) : (
-                <p>No product found</p>
-                )}
-          </>
-        )}
-      </section>
+        <section className="">
+          {loading ? (
+            <p>Loading...</p>
+            ) : (
+              <>
+              {product ? (
+                <ProductDetails product={product}/>
+                ) : (
+                  <p>No product found</p>
+                  )}
+            </>
+          )}
+        </section>
         </Suspense>
     </Layout>
   );

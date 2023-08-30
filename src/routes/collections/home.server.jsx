@@ -1,6 +1,6 @@
 import { Link, Image, gql, useShopQuery, CacheLong } from "@shopify/hydrogen";
 import Layout from "../../components/Layout.server";
-import "../../styles/home-goods.css";
+import "../../styles/homeGoods.css";
 
 const HomeGoods = () => {
   const {

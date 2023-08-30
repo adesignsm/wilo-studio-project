@@ -1,6 +1,6 @@
 import { Link, Image, gql, useShopQuery, CacheLong } from "@shopify/hydrogen";
 import Layout from "../../components/Layout.server";
-import "../../styles/shop-all.css";
+import "../../styles/shopAll.css";
 
 const ShopAll = () => {
   const { data, fetchMore } = useShopQuery({

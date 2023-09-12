@@ -23,11 +23,6 @@ body, html {
 
 }
 
-.container {
-    padding-right: var(--padding);
-    padding-left: var(--padding);
-}
-
 .skeleton {
     animation: skeleton-loading 1s linear infinite alternate;
     color: transparent !important;
@@ -47,6 +42,8 @@ body, html {
 header {
     border-bottom: 1px solid var(--light-border);
     padding: 10px 0;
+    position: relative;
+    z-index: 9;
 }
 .header-inner {
     display: flex;
@@ -63,6 +60,7 @@ header {
 .header-links {
     display: flex;
     align-items: center;
+    padding: 0 3rem;
 }
 .header-navigation.skeleton li a {
     color: transparent !important;
@@ -70,6 +68,7 @@ header {
 .header-navigation li a {
     text-decoration: none;
     color: var(--menu-link-item-color);
+    letter-spacing: 0.03rem;
 }
 .header-navigation li a:hover {
     color: black;
@@ -84,23 +83,25 @@ header {
     color: black;
     text-align: center;
 }
-.header-logo,
+.header-logo{
+    width: 100px;
+}
+
 .header-cart-link {
-    width: 150px;
+    width: 100px;
 }
 
 .header-cart-link {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     text-decoration: none;
     color: var(--menu-link-item-color);
     font-family: Circular,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 .header-cart-link span {
     position: relative;
-    top: -0.25em;
-    font-size: 65%;
+    font-size: 0.8em;
+    margin-left: 0.3rem;
 }
 .header-cart-link svg {
     height: var(--standard-font-size);
@@ -124,9 +125,10 @@ main {
     margin-top: 0.5em;
     text-align: center;
     font-weight: 400;
-    font-size: 4em;
+    font-size: 3em;
     line-height: 1em;
     font-family: var(--standard-font);
+    padding: 1rem;
 }
 .catalog-page {
     padding-top: 10px;
@@ -245,36 +247,34 @@ article img {
 
 
 video {
-    flex: 1 0 50%;
     max-width: 50%;
-    object-fit: cover;
-    height: auto;
+    object-fit: contain;
 }
 
 /*////////////////////////////// collection buttons home page*/
 
 .collections-container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    width: 100vw;
+    height: auto;
     flex-wrap: wrap;
-    align-items: stretch;
-
-  }
-  
-  .collection-item {
-    flex: 1 0 calc(50% - 10px);
-    /* flex-grow | flex-shrink | flex-basis */
-    height: 600px;
   }
 
-  .collection-image {
+.collection-image {
     width: 100%;
-    height: 100%;
+    height: 800px;
     object-fit: cover;
-  }
+    mix-blend-mode: darken;
+}
 
-  .collection-content {
+.collection-item {
+    width: 50%;
+}
+
+.collection-content {
     position: relative;
+    height: 800px;
 }
   
   .collection-button {
@@ -299,7 +299,10 @@ video {
     opacity: 1;
 }
  
-
+.collections-container-2 {
+    display: flex;
+    align-items: center;
+}
 
 
 
@@ -329,12 +332,18 @@ footer {
     color: black;
 }
 
+.footer .legal li:first-child,
+.footer .inquiry li:first-child,
+.footer .company li:first-child {
+    font-weight: bold;
+}
+
 .footer li:not(:last-child) {
     margin-right: 10px;
 }
 
 .footer p {
-    font-size: 0.5em;
+    font-size: 1em;
 }
 
 .subscription input {
@@ -343,6 +352,7 @@ footer {
     outline: none; /* Remove focus outline */
     padding: 5px 0; /* Add some padding to give space around the text inside the input field */
     font-size: 0.7em;
+    width: 90%;
 }
 
 
@@ -387,8 +397,6 @@ background-color: transparent;
     .collections-container > .collection-item {
         flex: 0 0 50%;
       }
-
-      
 }
 
 @media (max-width: 640px) {
@@ -398,10 +406,19 @@ background-color: transparent;
     .header-inner {
         flex-direction: column;
     }
+    .header-logo {
+        width: 100px;
+    }
     .header-cart-link {
-        position: absolute;
-        right: 15px;
-        top: 15px;
+        width: auto;
+        text-align: center;
+    }
+    .header-links {
+        flex-direction: column;
+        padding: 0;
+    }
+    .header-navigation li {
+        font-size: 0.8em;
     }
     .article-page-header h1 {
         font-size: 24px;
@@ -415,5 +432,17 @@ background-color: transparent;
     }
     .collections-container > .collection-item {
         flex: 0 0 100%;
+      }
+
+      .collections-container-2 {
+        flex-direction: column;
+      }
+
+      .collections-container-2 video {
+        max-width: 100%;
+      }
+
+      .collection-button {
+        opacity: 1;
       }
 }

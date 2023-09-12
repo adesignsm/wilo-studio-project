@@ -61,6 +61,7 @@ const PRODUCT_QUERY = gql`
       id
       title
       description
+      tags
       images(first: 10) {
         edges {
           node {

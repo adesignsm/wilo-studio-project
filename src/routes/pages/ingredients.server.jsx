@@ -1,4 +1,3 @@
-
 import Layout from "../../components/Layout.server";
 import "../../styles/ingredients.css";
 import IngredientsSphere from "../../components/IngredientsSphere.client";

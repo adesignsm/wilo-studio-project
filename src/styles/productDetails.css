@@ -9,13 +9,19 @@
     flex: 1 0 50%;
   }
 
+.product-media {
+    margin-top: -10vh;
+}
 
 .product-details {
     display: flex;
     justify-content: space-between;
+    font-family: Circular,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
 .product-details p:first-child {
+    font-family: var(--standard-font);
+    font-weight: bolder;
     flex: 3;
 }
 
@@ -28,10 +34,17 @@
     height: auto;
 }
 
+.product-name h1 {
+    font-size: 4em;
+    text-transform: uppercase;
+    font-family: Circular,Helvetica Neue,Helvetica,Arial,sans-serif;
+    margin: 0;
+}
+
 .product-page-price {
     margin-bottom: 15px;
     font-weight: bold;
-
+    font-family: Circular,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
 .product-media ul {
@@ -41,6 +54,34 @@
 .product-media {
     object-fit: cover;
     mix-blend-mode: multiply;
+}
+
+.ingredients-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-family: Circular,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.ingredients-details ul {
+    list-style-type: none;
+    padding: 0;
+    display: inline;
+}
+
+.ingredients-details .ingredients-list a {
+    color: #000;
+    text-decoration: none;
+}
+
+.ingredients-details p:first-child {
+    font-family: var(--standard-font);
+    font-weight: bolder;
+    flex: 3;
+}
+
+.ingredients-details .ingredients-list {
+    flex: 7;
 }
 
 .add-to-cart-container {
@@ -56,10 +97,11 @@
     margin-top: auto; 
     background-color: transparent; 
     border-radius: 25px; 
-    color: var(--menu-link-item-color);
-    border: 1px solid var(--menu-link-item-color);
+    color: #000;
+    border: 1px solid #000;
     cursor: pointer;
     font-size: 16px;
+    padding: 0.3rem 1rem;
 }
 
 .add-to-cart[disabled] {
@@ -106,34 +148,82 @@
     height: 25px;
 }
 
-
-
-
-
-@media screen and (max-width: 768px) {
-    .product-container {
-      flex-direction: column;
+@media only screen and (max-width: 1024px) {
+    .product-name {
+        padding: 0 2rem;
     }
-  
-  }
 
+    .product-name h1 {
+        font-size: 3em;
+    }
 
-@media (max-width: 640px) {
-        .product-container,
-        .add-to-cart-container
-         {
-          flex-direction: column;  /* Stack children vertically */
-          align-items: center;     /* Center children horizontally */
-          justify-content: center; /* Center children vertically */
-        }
-      
-        /* Ensure full width for child components */
-        .product-name,
-        .product-media,
-        .product-details,
-        .add-to-cart,
-        .cart-quantity-selector button {
-          width: 100%;
-          text-align: center;      /* Text center for block elements */
-        }
+    .product-details p:nth-child(2) {
+        font-size: 0.9em;
+    }
+
+    .product-media ul {
+        padding: 0;
+    }
+
+    .product-media img {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .product-container {
+        flex-direction: column-reverse;
+    }
+
+    .product-media ul {
+        padding: 0;
+        margin-top: -10vh;
+    }
+
+    .product-name {
+        padding: 0;
+    }
+
+    .product-media {
+        margin: 0 auto;
+    }
+
+    .product-media img {
+        width: 100%;
+    }
+
+    .product-name h1 {
+        font-size: 2em;
+        text-align: center;
+    }
+
+    .product-details {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .product-details p:first-child {
+        font-weight: bolder;
+    }
+
+    .ingredients-details {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+        align-items: center;
+    }
+
+    .ingredients-details p {
+        font-weight: bolder;
+    }
+
+    .product-page-price {
+        text-align: center;
+    }
+
+    .add-to-cart-container {
+        flex-direction: column-reverse;
+        margin-bottom: 5vh;
+    }
 }

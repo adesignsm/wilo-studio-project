@@ -12,6 +12,9 @@
 
 .skin-products-grid-container{
     border: 1px solid #000000;
+    border-left: none;
+    border-bottom: none;
+    height: 100%;
 }
 
 .skin-products-container > a:hover .skin-products-info {
@@ -41,6 +44,7 @@
     margin: 0.3rem 0;
     font-family: 'NeueHaasDisplayThin';
     font-weight: bolder;
+    text-transform: uppercase;
   }
   
   @media (max-width: 768px) {

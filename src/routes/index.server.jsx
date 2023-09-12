@@ -15,36 +15,31 @@ const Home = () => {
   return (
     <Layout>
       <section className="home-page container">
-
           <div className="collections-container">
-          {collections.nodes.map((collection) => {
-            return (
-              <div key={collection.id} className="collection-item">
-              <Link to={`/collections/${collection.handle}`}>
-                  {collection?.image && (
-                    <div className="collection-content">
-                  <Image className="collection-image" 
-                  alt={`Image of ${collection.title}`} 
-                  data={collection.image}
-        
-                  />
-
-                  <button className="collection-button">{collection.handle}</button>
-                    </div>
+            {collections.nodes.map((collection) => {
+              return (
+                <div key={collection.id} className="collection-item">
+                <Link to={`/collections/${collection.handle}`}>
+                    {collection?.image && (
+                      <div className="collection-content">
+                        <Image className="collection-image" alt={`Image of ${collection.title}`} data={collection.image} />
+                        <button className="collection-button">{collection.handle}</button>
+                      </div>
                     )}
-              </Link>
-            </div>
-            );
-          })}
-
-          <video autoPlay loop muted>
-            <source src={LANDING_VID} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+                </Link>
+              </div>
+              );
+            })}
           </div>
-        <p>A collection of self-care products to create a tranquil environment 
-          where rest and relaxation can take place.
-        </p>
+          <div className="collections-container-2">
+            <video autoPlay loop muted >
+              <source src={LANDING_VID} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+            <p>A collection of self-care products to create a tranquil environment 
+              where rest and relaxation can take place.
+            </p>
+          </div>
         <br/> 
       </section>
     </Layout>

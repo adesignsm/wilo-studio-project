@@ -12,6 +12,7 @@ const Footer = () => {
 
     // check if the data exists
     const shop = data?.shop || {} ;
+    console.log(shop)
 
     
     return (
@@ -31,7 +32,7 @@ const Footer = () => {
                 <li><Link to={`/policy/${shop.refundPolicy.handle}`}>{data.shop.refundPolicy.title}</Link></li>
             </ul>
 
-            <ul className="comapny">
+            <ul className="company">
                 <li> Comapny </li>
                 <li><Link to='/pages/About'>About</Link></li>
                 <li><Link to='/pages/Contact'>Contact Us</Link></li>

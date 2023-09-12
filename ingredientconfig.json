@@ -1,0 +1,38 @@
+[
+    {
+        "name": "aloe",
+        "description": "Aloe is a cactus-like plant that grows in hot, dry climates. It is cultivated in subtropical regions around the world. We use aloe in our skincare for its soothing quality. It helps calm irritation and redness, re-hydrate and soften your skin. Aloe is very gentle, making it great for sensitive skin."
+    },
+    {
+        "name": "almond oil",
+        "description": "Almond oil, a prized skincare ingredient, provides an array of benefits. Its emollient properties deeply moisturize and soften the skin, improving texture and radiance. With its high vitamin E content, almond oil protects against free radicals and supports youthful-looking skin. Reveal a healthy, nourished complexion with the rejuvenating effects of almond oil."
+    },
+    {
+        "name": "coconut oil",
+        "description": "Coconut oil, a versatile skincare ingredient, offers numerous benefits. Its natural fatty acids deeply moisturize and nourish the skin, leaving it soft and supple. With its antimicrobial properties, coconut oil helps combat bacteria and soothe irritation. Embrace the hydrating and protective qualities of coconut oil for a healthier, glowing complexion."
+    },
+    {
+        "name": "caster oil",
+        "description": "Castor oil, a potent skincare ingredient, offers a range of benefits. Its rich composition of fatty acids deeply moisturizes and conditions the skin, promoting a smoother appearance. Known for its anti-inflammatory properties, castor oil soothes irritated skin and helps reduce acne. Experience the rejuvenating effects of castor oil for healthier, nourished skin."
+    },
+    {
+        "name": "cocoa butter",
+        "description": "Cocoa butter, derived from cocoa beans, is a nourishing skincare ingredient. It deeply moisturizes, softens, and improves skin elasticity. Packed with antioxidants, vitamins, and healthy fatty acids, it helps prevent dryness, diminishes scars and stretch marks, and promotes a radiant complexion. Experience the luxurious benefits of cocoa butter for healthier, more supple skin."
+    },
+    {
+        "name": "macadamia oil",
+        "description": "Macadamia oil, a luxurious skincare ingredient, boasts a multitude of benefits. Its lightweight texture deeply nourishes and hydrates the skin, leaving it supple and smooth. Rich in antioxidants and fatty acids, macadamia oil helps repair and rejuvenate the skin, promoting a youthful glow. Experience the indulgent benefits of macadamia oil for a radiant complexion."
+    },
+    {
+        "name": "glycerin",
+        "description": "Glycerin, a versatile skincare ingredient, offers numerous benefits. Its humectant properties attract and retain moisture, keeping the skin hydrated and plump. Glycerin also helps strengthen the skin’s barrier function, protecting against environmental stressors. With its gentle nature, it suits various skin types, making it a must-have for nourished and healthy-looking skin."
+    },
+    {
+        "name": "vitamin e",
+        "description": "Vitamin E oil, a potent skincare ingredient, provides an array of benefits. Its antioxidant properties help protect the skin from free radicals, reducing signs of aging. Vitamin E oil deeply moisturizes and nourishes, improving skin texture and elasticity. Embrace the rejuvenating effects of vitamin E oil for a radiant and youthful complexion."
+    },
+    {
+        "name": "jojoba oil",
+        "description": "Jojoba oil, a prized skincare ingredient, offers a range of benefits. Its similarity to the skin’s natural sebum allows for excellent absorption and moisturization. Jojoba oil helps balance oil production, making it suitable for various skin types. It also soothes and protects the skin, promoting a healthy and revitalized appearance. Embrace the nourishing effects of jojoba oil for radiant, rejuvenated skin."
+    }
+]

@@ -6,7 +6,8 @@ import {
   CartLineProvider,
   useCart,
   CartLineQuantityAdjustButton,
-  CartLineQuantity
+  CartLineQuantity,
+  Link
   } from "@shopify/hydrogen";
   import "../styles/productDetails.css";
   
@@ -20,14 +21,14 @@ import {
   };
   
   const ProductForm = ({ product }) => {
-    console.log(product);
     
     const { selectedVariant, setSelectedOption } = useProductOptions();
     const isOutOfStock = !selectedVariant?.availableForSale || false;
     const { lines } = useCart();
-    const firstLine = lines[0]; // Assuming you want to adjust the quantity of the first line in the cart.
+    const firstLine = lines[0];
 
-  
+    console.log(product);
+
     return (
       <>
         <div className="product-container">
@@ -37,25 +38,35 @@ import {
               <p>Info</p>
               <p>{product.description}</p>
             </div>
-            <ProductPrice 
-              className="product-page-price" 
-              withoutTrailingZeros
-              data={product}
-              variantId={selectedVariant.id}
-            />
+            {product.tags.length > 0 && 
+              <div className="ingredients-details">
+                <p>Ingredients</p>
+                <div className="ingredients-list">
+                  {product.tags.map((ingredient, index) => (
+                    <span key={index}>
+                      <Link to={`ingredients/${ingredient.toLowerCase().replace(" ", "-")}`} className="tag-link">
+                        {ingredient}
+                      </Link>
+                      {index < product.tags.length - 1 && <span>, </span>}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            }
+            <ProductPrice className="product-page-price" withoutTrailingZeros data={product} variantId={selectedVariant.id} />
             <div className="add-to-cart-container">
                 <div className="add-to-cart-box">
                   <AddToCartButton disabled={isOutOfStock} className="add-to-cart" >
                     {isOutOfStock ? 'Out of stock' : 'Add to cart'}
                    </AddToCartButton>
                 </div>
-                  <div className="qty-box">
-                      {firstLine && (
-                          <CartLineProvider key={firstLine.id} line={firstLine}>
-                              <CartLineQuantityAdjust />
-                          </CartLineProvider>
-                      )}
-                    </div>
+                {/* <div className="qty-box">
+                  {firstLine && 
+                    <CartLineProvider key={firstLine?.id || 'defaultKey'} line={firstLine || 0}>
+                      <CartLineQuantityAdjust />
+                    </CartLineProvider>
+                  }
+                </div> */}
             </div>
           </div>
   
@@ -86,7 +97,7 @@ import {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15" />
                     </svg>
                 </CartLineQuantityAdjustButton>
-                <CartLineQuantity />
+                  <CartLineQuantity />
                 <CartLineQuantityAdjustButton adjust="increase">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />

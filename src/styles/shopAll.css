@@ -11,7 +11,10 @@
 }
 
 .all-products-grid-container{
-    border: 1px solid #000000;
+    border: 1px solid #000;
+    border-left: none;
+    border-bottom: none;
+    height: 100%;
 }
 
 .all-products-container > a:hover .all-products-info {
@@ -22,6 +25,7 @@
     transition: transform 0.3s ease;
     width: 100%;
     height: auto;
+    object-fit: contain;
   }
 
 .all-products-info {
@@ -41,6 +45,7 @@
     margin: 0.3rem 0;
     font-family: 'NeueHaasDisplayThin';
     font-weight: bolder;
+    text-transform: uppercase;
   }
   
   @media (max-width: 768px) {

@@ -18,6 +18,13 @@ const IngredientLightBox = ({ingredient}) => {
 
 const SphereText = ({ radius, segments, rings, setIngredient }) => {
     const sphereRef = useRef();
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+        radius = 1.8;
+    } else {
+        radius = 3;
+    }
 
     useFrame(() => {
         if (sphereRef.current) {
@@ -28,13 +35,9 @@ const SphereText = ({ radius, segments, rings, setIngredient }) => {
     const words = [
         "Cocoa Butter", "Jojoba Oil", "Shea Butter",
         "Almond Oil", "Macadamia Oil", "Aloe",
-        "Caster Oil", "Vitamin E Oil", "Soy Wax",
+        "Caster Oil", "Vitamin E", "Soy Wax",
         "Glycerin", "Coconut Oil", 
     ];
-
-    const handleClick = (e) => {
-        setIngredient(e.target.innerText);
-    }
 
     const textElements = words.map((word, index) => {
         const angle = (index / words.length) * Math.PI * 2;
@@ -43,7 +46,9 @@ const SphereText = ({ radius, segments, rings, setIngredient }) => {
     
         return (
           <Html key={index} position={new Vector3(x, 1, z)}>
-            <div className="text-element" onClick={(e) => handleClick(e)}>{word}</div>
+            <a href={`/ingredients/${word.toLowerCase().replace(" ", "-")}`} className="tag-link">
+                <div className="text-element">{word}</div>
+            </a>
           </Html>
         );
     });

@@ -3,6 +3,8 @@ import { Suspense } from "react";
 import Footer from "./Footer.server";
 import CartBubble from "./CartBubble.client";
 
+import LOGO from "../assets/WILO_LOGO_BLK.svg";
+
 const Layout = ({ children }) => {
 
   const data = useShopQuery({
@@ -24,7 +26,7 @@ const Layout = ({ children }) => {
             <div className="container header-inner">
                 <div className="header-links">
                 <Link to='/' className="header-logo">
-                    LOGO
+                    <img src={LOGO} />
                 </Link>
                 <ul className="header-navigation">
                     <li><Link to='collections/shop-all'>SHOP ALL</Link></li>

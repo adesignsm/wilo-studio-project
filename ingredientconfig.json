@@ -34,5 +34,13 @@
     {
         "name": "jojoba oil",
         "description": "Jojoba oil, a prized skincare ingredient, offers a range of benefits. Its similarity to the skin’s natural sebum allows for excellent absorption and moisturization. Jojoba oil helps balance oil production, making it suitable for various skin types. It also soothes and protects the skin, promoting a healthy and revitalized appearance. Embrace the nourishing effects of jojoba oil for radiant, rejuvenated skin."
+    },
+    {
+        "name": "shea butter",
+        "description": "Shea butter, a cherished skincare staple, offers a multitude of advantages. Known for its exceptional moisturizing properties, shea butter deeply hydrates and smoothes the skin, enhancing its texture and natural glow. Rich in vitamin A and E, shea butter serves as a protective shield against harmful free radicals, promoting a youthful and vibrant complexion. Experience the transformative effects of shea butter as it unveils a radiant and nourished skin appearance."
+    },
+    {
+        "name":"soy wax",
+        "description": "Soy wax, a preferred choice for candle making, offers a range of advantages. As a natural and renewable resource, soy wax burns cleanly, emitting minimal soot and toxins. Its slow, even burn enhances the longevity of candles. Soy wax also allows for excellent fragrance retention, filling your space with delightful scents. Opt for the eco-friendly and aromatic qualities of soy wax candles for a cleaner, longer-lasting, and fragrant candle-burning experience."
     }
 ]

@@ -16,19 +16,20 @@ const IngredientLightBox = ({ingredient}) => {
     )
 }
 
-const SphereText = ({ radius, segments, rings, setIngredient }) => {
+const SphereText = ({ radius, segments, rings }) => {
     const sphereRef = useRef();
     const isMobile = window.innerWidth <= 768;
 
-    if (isMobile) {
-        radius = 1.8;
-    } else {
-        radius = 3;
-    }
+    isMobile ? radius = 1.8 : radius = 3;
 
     useFrame(() => {
         if (sphereRef.current) {
             sphereRef.current.rotation.y += 0.0005;
+            if (sphereRef.current.children[0].geometry.boundingSphere && isMobile) {
+
+            } else if (sphereRef.current.children[0].geometry.boundingSphere && !isMobile) {
+
+            }
         }
     });
 

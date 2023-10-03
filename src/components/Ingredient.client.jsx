@@ -39,8 +39,10 @@ const Ingredient = () => {
                     })}
                 </div>
                 <div className="go-back-container" onClick={handleClick}>
-                    <img src={leftArrow} />
-                    <p> Back</p>
+                    <div className="go-back-button">
+                        <img src={leftArrow} />
+                        <p> Back</p>
+                    </div>
                 </div>
             </div>
         </>

@@ -130,7 +130,7 @@ const CartTable = () => {
     
           World.add(engine.current.world, [ball]);
         }
-      };
+    };
 
     if (lines.length === 0) {
         if(status == 'idle') {

@@ -85,6 +85,7 @@
 
 .ingredients-details .ingredients-list {
     flex: 7;
+    max-width: 60%;
 }
 
 .add-to-cart-container {

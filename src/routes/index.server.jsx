@@ -33,7 +33,7 @@ const Home = () => {
           </div>
           <div className="collections-container-2">
             <video autoPlay loop muted >
-              <source src={LANDING_VID} type="video/mp4" />
+              <source src="https://cdn.shopify.com/videos/c/o/v/f1bb21e5820d4557b6252c411719bc15.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
             <p>A collection of self-care products to create a tranquil environment 

@@ -5,7 +5,7 @@ import Ingredient from "../../components/Ingredient.client";
 const IngredientPage = () => {  
     return (
         <Layout>
-            <Ingredient onLoad={console.log("hit")}/>
+            <Ingredient />
         </Layout>
     );
 }

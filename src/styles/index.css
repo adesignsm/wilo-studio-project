@@ -264,7 +264,7 @@ video {
 
 .collection-image {
     width: 100%;
-    height: 800px;
+    height: 900px;
     object-fit: cover;
     mix-blend-mode: darken;
 }
@@ -275,7 +275,7 @@ video {
 
 .collection-content {
     position: relative;
-    height: 800px;
+    height: 900px;
 }
   
   .collection-button {

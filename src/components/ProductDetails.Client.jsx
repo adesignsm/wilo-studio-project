@@ -27,8 +27,6 @@ import {
     const { lines } = useCart();
     const firstLine = lines[0];
 
-    console.log(product);
-
     return (
       <>
         <div className="product-container">

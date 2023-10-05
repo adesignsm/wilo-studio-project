@@ -57,7 +57,7 @@ const QUERY = gql`
           node {
             handle
             title
-            media(first: 2) {
+            media(first: 10) {
               edges {
                 node {
                   previewImage {

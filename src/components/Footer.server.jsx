@@ -12,8 +12,6 @@ const Footer = () => {
 
     // check if the data exists
     const shop = data?.shop || {} ;
-    console.log(shop)
-
     
     return (
 

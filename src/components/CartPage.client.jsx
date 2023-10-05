@@ -54,8 +54,6 @@ const CartTable = () => {
         const cw = window.innerWidth / 2;
         const ch = $(".cart-container").height();
 
-        console.log(ch)
-
         const render = Render.create({
             element: scene.current,
             engine: engine.current,
@@ -121,8 +119,8 @@ const CartTable = () => {
               render: {
                 sprite: {
                   texture: imageUrl,
-                  xScale: 0.5, // Adjust the scale as needed
-                  yScale: 0.5, // Adjust the scale as needed
+                  xScale: 0.2, // Adjust the scale as needed
+                  yScale: 0.2, // Adjust the scale as needed
                 },
               },
             }

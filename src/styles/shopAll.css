@@ -18,7 +18,7 @@
 }
 
 .all-products-container > a:hover .all-products-info {
-    transform: translateY(0);
+    transform: translateY(0%);
   }
   
 .all-products-container > a img {
@@ -32,12 +32,12 @@
     display: flex;
     justify-content: space-between;
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
     padding: 1rem;
     color: #fff;
-    transform: translateY(100%);
+    transform: translateY(-100%);
     transition: transform 0.3s ease;
   }
   

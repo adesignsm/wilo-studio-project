@@ -24,11 +24,11 @@ const HomeGoods = () => {
 
             return (
               <Link key={product.handle} to={`/products/${product.handle}`}>
-                {product?.media?.edges[0]?.node?.previewImage?.url && (
+                {product?.media?.edges[1]?.node?.previewImage?.url && (
                     <div className="grid-container">
                         <Image
                             alt={`Image of ${product.title}`}
-                            src={product.media.edges[0].node.previewImage.url}
+                            src={product.media.edges[1].node.previewImage.url}
                             height={product.media.edges[0].node.previewImage.height}
                             width={product.media.edges[0].node.previewImage.width}
                             />
@@ -57,7 +57,7 @@ const QUERY = gql`
           node {
             handle
             title
-            media(first: 1) {
+            media(first: 2) {
               edges {
                 node {
                   previewImage {

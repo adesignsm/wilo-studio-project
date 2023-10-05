@@ -42,7 +42,12 @@ body, html {
 header {
     border-bottom: 1px solid var(--light-border);
     padding: 1px 0;
-    position: relative;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    padding-bottom: 1rem;
     z-index: 9;
 }
 .header-inner {
@@ -289,6 +294,7 @@ video {
     transition: opacity 0.3s ease-in-out;
     background-color: transparent;
     color: white;
+    text-transform: uppercase;
   }
   
   
@@ -379,6 +385,16 @@ background-color: transparent;
         display: flex;
         flex-wrap: wrap;
     }
+    .header-navigation {
+        padding-left: 0;
+    }
+    .header-navigation li {
+        font-size: 0.8em;
+        white-space: nowrap;
+    }
+    .header-navigation li:not(:last-child) {
+        margin-right: 1rem;
+    }
     .line-item-image {
         max-width: 100px;
     }
@@ -414,8 +430,15 @@ background-color: transparent;
         flex-direction: column;
         padding: 0;
     }
+    .header-navigation {
+        padding-left: 0;
+    }
     .header-navigation li {
         font-size: 0.8em;
+        white-space: nowrap;
+    }
+    .header-navigation li:not(:last-child) {
+        margin-right: 1rem;
     }
     .article-page-header h1 {
         font-size: 24px;

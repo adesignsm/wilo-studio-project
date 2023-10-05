@@ -12,7 +12,7 @@ import {
   import "../styles/productDetails.css";
   
   const ProductDetails = ({ product }) => { 
-    
+
     return (
       <ProductOptionsProvider data={product}>
         <ProductForm product={product}/>
@@ -76,6 +76,19 @@ import {
                     <img src={node.url} alt="" width={node.width} height={node.height} />
                   </li>
                 ))}
+                {product.media && product.media.edges && (
+                  product.media.edges.map(({ node }) => {
+                    if (node.mediaContentType === "VIDEO") {
+                      return (
+                        <li key={node.sources[0].url}>
+                          <video autoPlay muted loop>
+                            <source src={node.sources[0].url} type="video/mp4"></source>
+                          </video>
+                        </li>
+                      )
+                    }
+                  })
+                )}
               </ul>
             )}
           </div>

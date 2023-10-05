@@ -91,6 +91,19 @@ const PRODUCT_QUERY = gql`
         title
         description
       }
+      media(first: 10) {  # Include the media field to retrieve video data
+        edges {
+          node {
+            mediaContentType
+            ... on Video {  # Use the ... on Video fragment for video-specific fields
+              sources {
+                url
+                format
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;

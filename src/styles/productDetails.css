@@ -65,6 +65,11 @@
     width: 70%;
 }
 
+.product-media video {
+    max-width: 70%;
+    object-fit: contain;
+}
+
 .ingredients-details {
     display: flex;
     justify-content: space-between;

@@ -13,6 +13,8 @@ const Skin = () => {
 
   const { products } = collection || {};
 
+  console.log(collection)
+
   return (
     <>
       <Layout>
@@ -69,13 +71,13 @@ const QUERY = gql`
               }
             }
             variants(first: 1) {
-                edges {
-                  node {
-                    priceV2 {
-                      amount
-                    }
+              edges {
+                node {
+                  priceV2 {
+                    amount
                   }
                 }
+              }
             }
           }
         }

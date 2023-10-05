@@ -47,7 +47,6 @@ header {
     left: 0;
     background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
-    padding-bottom: 1rem;
     z-index: 9;
 }
 .header-inner {
@@ -385,6 +384,9 @@ background-color: transparent;
         display: flex;
         flex-wrap: wrap;
     }
+    header {
+        padding-bottom: 1rem;
+    }
     .header-navigation {
         padding-left: 0;
     }
@@ -415,6 +417,9 @@ background-color: transparent;
 @media (max-width: 640px) {
     .product-grid, .article-grid {
         grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    header {
+        padding-bottom: 1rem;
     }
     .header-inner {
         flex-direction: column;

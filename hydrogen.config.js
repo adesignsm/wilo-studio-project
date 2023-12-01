@@ -1,18 +1,20 @@
-
-import {defineConfig} from '@shopify/hydrogen/config';
+import {defineConfig, CookieSessionStorage} from '@shopify/hydrogen/config';
 
 export default defineConfig({
   shopify: {
-    storeDomain: 'wilo-candles.myshopify.com',
-    storefrontToken: '3619e2a77120857c6e57862b096710b6',
+    defaultCountryCode: '',
+    defaultLanguageCode: '',
+    storeDomain: Oxygen.env.PUBLIC_STORE_DOMAIN,
+    storefrontToken: Oxygen.env.PUBLIC_STOREFRONT_API_TOKEN,
+    privateStorefrontToken: Oxygen.env.PRIVATE_STOREFRONT_API_TOKEN,
     storefrontApiVersion: '2022-07',
-    // storeDomain: import.meta.env.VITE_STORE_DOMAIN || 'default.stud',
-    // storefrontToken: import.meta.env.VITE_STOREFRONT_TOKEN || 'default_token',
-    // storefrontApiVersion: import.meta.env.VITE_STOREFRONT_API_VERSION || 'default_version',
+    storefrontId: Oxygen.env.PUBLIC_STOREFRONT_ID,
   },
-  server: {
-    logger: {
-      showQueryTiming: import.meta.env.VITE_SHOW_QUERY_TIMING === 'true',
-    },
-  },
+  session: CookieSessionStorage('__session', {
+    path: '/',
+    httpOnly: true,
+    secure: import.meta.env.PROD,
+    sameSite: 'Strict',
+    maxAge: 60 * 60 * 24 * 30,
+  }),
 });

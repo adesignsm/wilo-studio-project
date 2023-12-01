@@ -21,7 +21,7 @@ import {
   };
   
   const ProductForm = ({ product }) => {
-    const { selectedVariant, setSelectedOption } = useProductOptions();
+    const { selectedVariant, setSelectedOption } = typeof window !== 'undefined' ? useProductOptions() : {};
     const isOutOfStock = !selectedVariant?.availableForSale || false;
     const { lines } = useCart();
     const firstLine = lines[0];
@@ -37,8 +37,6 @@ import {
         }
       }
     }, []);
-
-    console.log('Is mobile:', toggleAutoPlay);
 
     return (
       <>

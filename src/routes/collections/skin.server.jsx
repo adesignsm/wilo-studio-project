@@ -13,8 +13,6 @@ const Skin = () => {
 
   const { products } = collection || {};
 
-  console.log(collection)
-
   return (
     <>
       <Layout>

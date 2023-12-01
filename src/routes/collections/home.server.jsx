@@ -11,7 +11,6 @@ const HomeGoods = () => {
     preload: true,
   });
  
-
   const { products } = collection || {};
 
   return (

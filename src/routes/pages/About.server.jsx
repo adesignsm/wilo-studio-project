@@ -26,7 +26,7 @@ const AboutContent = () => {
         <div className="policy-container">
           <div className='left-div'>
             <h1>{shop.name || 'Shop Info Not Available'}</h1>
-            <Link to="/" className='policy-links'>Contact</Link>
+            {/* <Link to="/" className='policy-links'>Contact</Link> */}
             <Link to="/"><img src={leftArrow}/></Link>
           </div>
           <div className='right-div'>

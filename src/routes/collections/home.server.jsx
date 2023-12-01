@@ -52,7 +52,7 @@ export default HomeGoods;
 const QUERY = gql`
   query {
     collection(handle: "HOME") {
-      products(first: 3) {
+      products(first: 4) {
         edges {
           node {
             handle

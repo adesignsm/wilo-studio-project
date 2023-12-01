@@ -371,31 +371,66 @@ background-color: transparent;
 
 .subscription button img {
     width: 1rem;
-    }
+}
 
+.mobile-menu {
+    display: none;
+    width: 70vw;
+    height: auto;
+}
 
-  
+.mobile-menu-list {
+    position: absolute;
+    list-style: none;
+    margin-top: 3rem;
+    font-size: 1.5em;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(40px);
+    padding: 2rem;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.hamburger-button {
+    margin-left: 10rem;
+    margin-right: 4rem;
+}
+
+.mobile-menu-list li {
+    margin-bottom: 1rem;
+}
+
+.mobile-menu-list a {
+    text-decoration: none;
+    color: #000;
+    font-weight: normal;
+}
 
 @media (max-width: 768px) {
+    header {
+        padding-bottom: 1rem;
+        padding-top: 1rem;
+        position: fixed;
+    }
+    .mobile-menu {
+        display: flex;
+    }
+    .header-links {
+        width: 100vw;
+        justify-content: space-between;
+    }
+    .header-navigation {
+        display: none;
+    }
+    .header-cart-link {
+        display: none;
+    }
     .product-grid, .article-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .product-page {
         display: flex;
         flex-wrap: wrap;
-    }
-    header {
-        padding-bottom: 1rem;
-    }
-    .header-navigation {
-        padding-left: 0;
-    }
-    .header-navigation li {
-        font-size: 0.8em;
-        white-space: nowrap;
-    }
-    .header-navigation li:not(:last-child) {
-        margin-right: 1rem;
     }
     .line-item-image {
         max-width: 100px;
@@ -420,30 +455,21 @@ background-color: transparent;
     }
     header {
         padding-bottom: 1rem;
+        padding-top: 1rem;
     }
-    .header-inner {
-        flex-direction: column;
-    }
-    .header-logo {
-        width: 80px;
-    }
-    .header-cart-link {
-        width: auto;
-        text-align: center;
+    .mobile-menu {
+        display: flex;
+        justify-content: space-around;
     }
     .header-links {
-        flex-direction: column;
-        padding: 0;
+        width: 100vw;
+        justify-content: space-between;
     }
     .header-navigation {
-        padding-left: 0;
+        display: none;
     }
-    .header-navigation li {
-        font-size: 0.8em;
-        white-space: nowrap;
-    }
-    .header-navigation li:not(:last-child) {
-        margin-right: 1rem;
+    .header-cart-link {
+        display: none;
     }
     .article-page-header h1 {
         font-size: 24px;

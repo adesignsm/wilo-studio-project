@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { 
   useProductOptions,
   AddToCartButton, 
@@ -12,7 +13,6 @@ import {
   import "../styles/productDetails.css";
   
   const ProductDetails = ({ product }) => { 
-
     return (
       <ProductOptionsProvider data={product}>
         <ProductForm product={product}/>
@@ -21,11 +21,24 @@ import {
   };
   
   const ProductForm = ({ product }) => {
-    
     const { selectedVariant, setSelectedOption } = useProductOptions();
     const isOutOfStock = !selectedVariant?.availableForSale || false;
     const { lines } = useCart();
     const firstLine = lines[0];
+    const [toggleAutoPlay, setToggleAutoPlay] = useState(false);
+
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        const isMobile = window.matchMedia('(min-width: 375px)').matches;
+        if (isMobile) {
+          setToggleAutoPlay(true);
+        } else {
+          setToggleAutoPlay(false);
+        }
+      }
+    }, []);
+
+    console.log('Is mobile:', toggleAutoPlay);
 
     return (
       <>
@@ -81,7 +94,7 @@ import {
                     if (node.mediaContentType === "VIDEO") {
                       return (
                         <li key={node.sources[0].url}>
-                          <video autoPlay muted loop>
+                          <video autoPlay={toggleAutoPlay} muted={true} loop={true} playsInline={true}>
                             <source src={node.sources[0].url} type="video/mp4"></source>
                           </video>
                         </li>

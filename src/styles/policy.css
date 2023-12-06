@@ -1,7 +1,7 @@
 .policy-container {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
 }
 
 .left-div {
@@ -9,15 +9,34 @@
   flex-direction: column;
   flex: 0 0 30%;
   padding: 2rem;
-  }
+}
   
-  .right-div {
-    flex: 0 0 70%;
-    padding: 2rem 2rem;
-  }
+.right-div {
+  flex: 0 0 70%;
+  padding: 2rem 2rem;
+}
 
 .policy-links {
   text-decoration: none;
   color: var(--menu-link-item-color);
   padding-bottom: 0.5rem;
+}
+
+@media only screen and (min-width: 375px) and (max-width: 768px) {
+  .policy-container {
+    width: 100%;
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+    flex-direction: column;
+  }
+
+  .left-div {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .left-div a {
+    margin-right: 1rem;
+  }
 }

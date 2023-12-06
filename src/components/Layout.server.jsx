@@ -23,11 +23,10 @@ const Layout = ({ children }) => {
     <>
       <Seo type="defaultSeo" data={{title: shop.name, description: shop.description}} />
       <header>
+        <div className='announcement-bar'><p>Free shipping on orders over $100 – Canada wide</p></div>
         <div className="container header-inner">
           <div className="header-links">
-            <Link to='/' className="header-logo">
-              <img src={LOGO} />
-            </Link>
+            <Link to='/' className="header-logo"><img src={LOGO} /></Link>
             <MobileMenu />
             <ul className="header-navigation">
               <li><Link to='collections/shop-all'>SHOP ALL</Link></li>

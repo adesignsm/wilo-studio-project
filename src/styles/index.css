@@ -40,7 +40,7 @@ body, html {
 }
 
 header {
-    border-bottom: 1px solid var(--light-border);
+    /* border-bottom: 1px solid var(--light-border); */
     padding: 1px 0;
     position: sticky;
     top: 0;
@@ -48,6 +48,19 @@ header {
     background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
     z-index: 9;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+.announcement-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #000;
+}
+.announcement-bar p {
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
 }
 .header-inner {
     display: flex;
@@ -379,13 +392,39 @@ background-color: transparent;
     height: auto;
 }
 
-.mobile-menu-list {
+.mobile-menu-list-container {
     position: absolute;
-    list-style: none;
-    margin-top: 3.2rem;
-    font-size: 1.5em;
+    width: 100vw;
+    height: 100vh;
+    top: 10vh;
+    margin-top: 0.5rem;
+    left: 0;
     background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(40px);
+    z-index: -1;
+    overflow-y: scroll;
+    padding-bottom: 1rem;
+}
+
+.mobile-menu-list-container img {
+    width: 50%;
+    object-fit: contain;
+    margin: 1rem;
+}
+
+.mobile-menu-list-container .row-one {
+    display: flex;
+}
+
+.mobile-menu-list-container .row-two {
+    display: flex;
+    padding-bottom: 5rem;
+}
+
+.mobile-menu-list {
+    list-style: none;
+    margin-top: 3.2rem;
+    font-size: 14px;
     padding: 2rem;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -394,18 +433,14 @@ background-color: transparent;
 .hamburger-button {
     margin-left: 10rem;
     margin-right: 4rem;
-    transform: scale(1.5);
-    background-color: rgba(255, 255, 255, 0.6);
     border: none;
-    color: inherit;
-    font-size: inherit;
     cursor: pointer;
     outline: none;
     padding: 0;
-    padding-left: 0.2rem;
-    padding-right: 0.2rem;
-    padding-bottom: 0.2rem;
-    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #000;
 }
 
 .mobile-menu-list li {
@@ -415,21 +450,21 @@ background-color: transparent;
 .mobile-menu-list a {
     text-decoration: none;
     color: #000;
-    font-weight: normal;
+    font-weight: 400;
+}
+
+.mobile-header-cart-link {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
 }
 
 @media (max-width: 768px) {
     header {
-        padding-bottom: 1rem;
-        padding-top: 1rem;
         position: fixed;
     }
-    .mobile-menu {
-        display: flex;
-    }
-    .header-links {
-        width: 100vw;
-        justify-content: space-between;
+    .header-logo {
+        display: none;
     }
     .header-navigation {
         display: none;
@@ -462,20 +497,31 @@ background-color: transparent;
 }
 
 @media (max-width: 640px) {
+    header {
+        position: fixed;
+    }
     .product-grid, .article-grid {
         grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
-    header {
-        padding-bottom: 1rem;
-        padding-top: 1rem;
     }
     .mobile-menu {
         display: flex;
         justify-content: space-around;
+        width: 100vw;
+        align-items: center;
+    }
+    .hamburger-button {
+        margin: 0;
+        border: none;
+        background-color: transparent;
+    }
+    .header-logo-mobile img {
+        margin-top: 0.1rem;
+        width: 40px;
     }
     .header-links {
         width: 100vw;
-        justify-content: space-between;
+        justify-content: space-evenly;
+        padding: 0;
     }
     .header-navigation {
         display: none;

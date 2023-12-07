@@ -396,24 +396,27 @@ background-color: transparent;
     position: absolute;
     width: 100vw;
     height: 100vh;
-    top: 10vh;
-    margin-top: 0.5rem;
+    top: 9vh;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 1);
     backdrop-filter: blur(40px);
     z-index: -1;
     overflow-y: scroll;
+    overflow-x: hidden;
     padding-bottom: 1rem;
 }
 
 .mobile-menu-list-container img {
-    width: 50%;
     object-fit: contain;
-    margin: 1rem;
+    margin: 0.5rem;
 }
 
 .mobile-menu-list-container .row-one {
     display: flex;
+}
+
+.mobile-menu-list-container .row-one img {
+    margin-left: 1rem;
 }
 
 .mobile-menu-list-container .row-two {
@@ -461,7 +464,9 @@ background-color: transparent;
 
 @media (max-width: 768px) {
     header {
-        position: fixed;
+        position: sticky;
+        top: 0;
+        left: 0;
     }
     .header-logo {
         display: none;
@@ -497,9 +502,6 @@ background-color: transparent;
 }
 
 @media (max-width: 640px) {
-    header {
-        position: fixed;
-    }
     .product-grid, .article-grid {
         grid-template-columns: repeat(1, minmax(0, 1fr));
     }

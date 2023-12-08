@@ -52,6 +52,10 @@
     .all-products-container > a {
       flex: 0 0 50%;
     }
+
+    .all-products-info {
+      transform: translateY(0);
+    }
   }
   
   @media (max-width: 640px) {

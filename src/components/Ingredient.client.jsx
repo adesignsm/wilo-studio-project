@@ -1,5 +1,6 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
-import $ from "jquery";
 import ingredientData from "../../ingredientconfig.json";
 
 import leftArrow from "../assets/leftArrow.svg";
@@ -9,18 +10,25 @@ const Ingredient = () => {
   const [ingredient, setIngredient] = useState("");
 
   useEffect(() => {
-    const url = window.location.href;
-    const parsedRL = new URL(url);
-    const pathName = parsedRL.pathname;
+    const load = async () => {
+      if (typeof window !== "undefined") {
+        const $ = (await import("jquery")).default;
 
-    const urlParts = pathName.split("/");
-    const ingredientName = urlParts[urlParts.length - 1];
+        const url = window.location.href;
+        const parsedRL = new URL(url);
+        const pathName = parsedRL.pathname;
 
-    setIngredient(ingredientName.replace("-", " "));
+        const urlParts = pathName.split("/");
+        const ingredientName = urlParts[urlParts.length - 1];
 
-    setTimeout(() => {
-      $(".go-back-container").animate({ opacity: "1" }, 500);
-    }, 1000);
+        setIngredient(ingredientName.replace("-", " "));
+
+        setTimeout(() => {
+          $(".go-back-container").animate({ opacity: "1" }, 500);
+        }, 1000);
+      }
+    };
+    load();
   }, []);
 
   const handleClick = () => {

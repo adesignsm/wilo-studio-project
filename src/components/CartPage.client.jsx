@@ -1,3 +1,5 @@
+"use client";
+
 import {
   useCart,
   CartLineProvider,
@@ -9,16 +11,6 @@ import {
   CartLineQuantity,
   CartLineQuantityAdjustButton,
 } from "@shopify/hydrogen";
-import {
-  Engine,
-  Render,
-  Runner,
-  World,
-  Bodies,
-  Mouse,
-  MouseConstraint,
-} from "matter-js";
-import $ from "jquery";
 import { Suspense, useEffect, useRef, useState } from "react";
 import "../styles/cartPage.css";
 
@@ -34,33 +26,47 @@ export default CartPage;
 
 const CartTable = () => {
   const scene = useRef();
-  const engine = useRef(Engine.create());
   const { lines, checkoutUrl, status } = useCart();
   const cartProductImages = [];
+  const [engine, setEngine] = useState(null);
   const [matterInitialized, setMatterInitialized] = useState(false);
 
   useEffect(() => {
-    if (lines.length > 0 && !matterInitialized) {
-      lines.forEach((product) => {
-        cartProductImages.push(product.merchandise.image.url);
-      });
+    const init = async () => {
+      if (
+        lines.length > 0 &&
+        !matterInitialized &&
+        typeof window !== "undefined"
+      ) {
+        const $ = (await import("jquery")).default;
+        const Matter = await import("matter-js");
 
-      if (cartProductImages.length > 0) {
-        setTimeout(() => {
-          initializeMatter();
-          setMatterInitialized(true);
-        }, 500);
+        const engineInstance = Matter.Engine.create();
+        setEngine(engineInstance);
+
+        cartProductImages.push(...lines.map((p) => p.merchandise.image.url));
+
+        if (cartProductImages.length > 0) {
+          setTimeout(() => {
+            initializeMatter($, Matter, engineInstance);
+            setMatterInitialized(true);
+          }, 500);
+        }
       }
-    }
-  }, [lines, cartProductImages, matterInitialized]);
+    };
 
-  const initializeMatter = () => {
+    init();
+  }, [lines, matterInitialized]);
+
+  const initializeMatter = ($, Matter, engineInstance) => {
+    const { Engine, Render, Runner, World, Bodies, Mouse, MouseConstraint } =
+      Matter;
     const cw = window.innerWidth / 2;
     const ch = $(".cart-container").height();
 
     const render = Render.create({
       element: scene.current,
-      engine: engine.current,
+      engine: engineInstance,
       options: {
         width: cw,
         height: ch,
@@ -69,39 +75,36 @@ const CartTable = () => {
       },
     });
 
-    World.add(engine.current.world, [
+    World.add(engineInstance.world, [
       Bodies.rectangle(cw / 2, -10, 0, 20, { isStatic: false }),
       Bodies.rectangle(-10, ch / 2, 20, ch, { isStatic: true }),
       Bodies.rectangle(cw / 2, ch + 10, cw, 20, { isStatic: true }),
       Bodies.rectangle(cw + 10, ch / 2, 20, ch, { isStatic: true }),
     ]);
 
-    Runner.run(engine.current);
+    Runner.run(engineInstance);
     Render.run(render);
 
-    engine.current.world.gravity.y = 0.2;
+    engineInstance.world.gravity.y = 0.2;
 
     const mouse = Mouse.create(render.canvas);
-    const mouseConstraint = MouseConstraint.create(engine.current, {
+    const mouseConstraint = MouseConstraint.create(engineInstance, {
       mouse: mouse,
       constraint: {
         stiffness: 0.2,
-        render: {
-          visible: false,
-        },
+        render: { visible: false },
       },
     });
 
-    World.add(engine.current.world, mouseConstraint);
-
+    World.add(engineInstance.world, mouseConstraint);
     render.mouse = mouse;
 
-    addBalls();
+    addBalls(Matter, engineInstance);
 
     return () => {
       Render.stop(render);
-      World.clear(engine.current.world);
-      Engine.clear(engine.current);
+      World.clear(engineInstance.world);
+      Engine.clear(engineInstance);
       render.canvas.remove();
       render.canvas = null;
       render.context = null;
@@ -109,30 +112,23 @@ const CartTable = () => {
     };
   };
 
-  const addBalls = () => {
+  const addBalls = (Matter, engineInstance) => {
+    const { Bodies, World } = Matter;
+
     for (let i = 0; i < cartProductImages.length; i++) {
       const imageUrl = cartProductImages[i];
-
-      // Create a ball based on the image URL
       const ball = Bodies.circle(
         (Math.random() * window.innerWidth) / 2,
         Math.random() * -20,
         70,
         {
-          restitution: 1, // Adjust the restitution (bounce) as needed
-          friction: 0, // Adjust friction as needed
-          density: 20, // Adjust density as needed
-          render: {
-            sprite: {
-              texture: imageUrl,
-              xScale: 0.2, // Adjust the scale as needed
-              yScale: 0.2, // Adjust the scale as needed
-            },
-          },
+          restitution: 1,
+          friction: 0,
+          density: 20,
+          render: { sprite: { texture: imageUrl, xScale: 0.2, yScale: 0.2 } },
         },
       );
-
-      World.add(engine.current.world, [ball]);
+      World.add(engineInstance.world, [ball]);
     }
   };
 

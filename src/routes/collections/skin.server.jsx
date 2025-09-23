@@ -1,6 +1,5 @@
 import { Link, Image, gql, useShopQuery, CacheLong } from "@shopify/hydrogen";
 import Layout from "../../components/Layout.server";
-import "../../styles/skin.css";
 
 const Skin = () => {
   const {
@@ -24,19 +23,19 @@ const Skin = () => {
             return (
               <Link key={product.handle} to={`/products/${product.handle}`}>
                 {product?.media?.edges[1]?.node?.previewImage?.url && (
-                    <div className="skin-products-grid-container">
-                        <Image
-                            className=""
-                            alt={`Image of ${product.title}`}
-                            src={product.media.edges[1].node.previewImage.url}
-                            height={product.media.edges[0].node.previewImage.height}
-                            width={product.media.edges[0].node.previewImage.width}
-                        />
-                        <div className="skin-products-info">
-                        <h3> {product.title} </h3>
-                        <h3> ${price}0 </h3>
-                        </div>
+                  <div className="skin-products-grid-container">
+                    <Image
+                      className=""
+                      alt={`Image of ${product.title}`}
+                      src={product.media.edges[1].node.previewImage.url}
+                      height={product.media.edges[0].node.previewImage.height}
+                      width={product.media.edges[0].node.previewImage.width}
+                    />
+                    <div className="skin-products-info">
+                      <h3> {product.title} </h3>
+                      <h3> ${price}0 </h3>
                     </div>
+                  </div>
                 )}
               </Link>
             );

@@ -1,15 +1,14 @@
-import { 
-  useRouteParams, 
-  gql, 
-  useShopQuery, 
-  useServerAnalytics, 
-  ShopifyAnalyticsConstants, 
-  Seo
+import {
+  useRouteParams,
+  gql,
+  useShopQuery,
+  useServerAnalytics,
+  ShopifyAnalyticsConstants,
+  Seo,
 } from "@shopify/hydrogen";
 import { Suspense } from "react";
 import Layout from "../../components/Layout.server";
 import ProductDetails from "../../components/ProductDetails.client";
-
 
 const Product = ({ params }) => {
   const { handle } = useRouteParams(params);
@@ -17,7 +16,7 @@ const Product = ({ params }) => {
   const { data, loading } = useShopQuery({
     query: PRODUCT_QUERY,
     variables: {
-      handle: params.product || '',
+      handle: params.product || "",
     },
   });
 
@@ -37,23 +36,22 @@ const Product = ({ params }) => {
         <section className="">
           {loading ? (
             <p>Loading...</p>
-            ) : (
-              <>
+          ) : (
+            <>
               {product ? (
-                <ProductDetails product={product}/>
-                ) : (
-                  <p>No product found</p>
-                  )}
+                <ProductDetails product={product} />
+              ) : (
+                <p>No product found</p>
+              )}
             </>
           )}
         </section>
-        </Suspense>
+      </Suspense>
     </Layout>
   );
-}
+};
 
 export default Product;
-
 
 const PRODUCT_QUERY = gql`
   query GetProduct($handle: String!) {
@@ -91,11 +89,13 @@ const PRODUCT_QUERY = gql`
         title
         description
       }
-      media(first: 10) {  # Include the media field to retrieve video data
+      media(first: 10) {
+        # Include the media field to retrieve video data
         edges {
           node {
             mediaContentType
-            ... on Video {  # Use the ... on Video fragment for video-specific fields
+            ... on Video {
+              # Use the ... on Video fragment for video-specific fields
               sources {
                 url
                 format

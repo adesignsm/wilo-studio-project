@@ -1,0 +1,10 @@
+
+> hydrogen-storefront@0.0.0 dev
+> vite dev
+
+Port 3000 is in use, trying another one...
+
+  VITE v3.2.7  ready in 125 ms
+
+  ➜  Local:   http://localhost:3001/
+  ➜  Network: use --host to expose

@@ -1,8 +1,16 @@
-import { defineConfig } from 'vite';
-import hydrogen from '@shopify/hydrogen/plugin';
+import { defineConfig } from "vite";
+import hydrogen from "@shopify/hydrogen/plugin";
 
 export default defineConfig({
-  plugins: [
-    hydrogen({ experimental: { css: 'global' } }),
-  ],
+  plugins: [hydrogen()],
+  server: {
+    port: 3000,
+    host: true,
+  },
+  define: {
+    global: "globalThis",
+  },
+  build: {
+    target: "esnext",
+  },
 });

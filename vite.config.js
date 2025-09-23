@@ -6,13 +6,14 @@ export default defineConfig({
   ssr: {
     noExternal: [
       "@shopify/hydrogen",
-      "jquery",
-      "matter-js",
       "three",
       "@react-three/fiber",
       "@react-three/drei",
+      "matter-js",
+      "jquery",
     ],
   },
+
   server: {
     port: 3000,
     host: true,

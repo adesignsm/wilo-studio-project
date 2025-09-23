@@ -10,11 +10,10 @@
   "scripts": {
     "dev": "shopify hydrogen dev",
     "build": "shopify hydrogen build",
-    "preview": "shopify hydrogen preview"
+    "preview": "shopify hydrogen preview",
+    "deploy": "shopify hydrogen deploy"
   },
   "devDependencies": {
-    "@shopify/cli": "3.10.1",
-    "@shopify/cli-hydrogen": "3.10.1",
     "vite": "^2.9.0"
   },
   "dependencies": {

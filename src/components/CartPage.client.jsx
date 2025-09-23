@@ -25,45 +25,41 @@ const CartPage = () => {
 export default CartPage;
 
 const CartTable = () => {
-  const scene = useRef();
+  const sceneRef = useRef();
   const { lines, checkoutUrl, status } = useCart();
   const [cartProductImages, setCartProductImages] = useState([]);
-  const [engine, setEngine] = useState(null);
   const [matterInitialized, setMatterInitialized] = useState(false);
   const cleanupRef = useRef(null);
 
   useEffect(() => {
-    if (
-      lines.length === 0 ||
-      matterInitialized ||
-      typeof window === "undefined"
-    )
+    if (!lines.length || matterInitialized || typeof window === "undefined")
       return;
 
     const init = async () => {
-      const Matter = await import("matter-js");
-      const engineInstance = Matter.Engine.create();
-      setEngine(engineInstance);
+      // Dynamically import Matter.js to avoid server-side require()
+      const MatterModule = await import("matter-js");
+      const Matter = MatterModule.default || MatterModule;
+      const engine = Matter.Engine.create();
 
-      setCartProductImages(lines.map((p) => p.merchandise.image.url));
+      setCartProductImages(lines.map((line) => line.merchandise.image.url));
 
-      const checkDOM = () => {
+      // Wait until DOM is rendered and container has height
+      const waitForDOM = () => {
         const container = document.querySelector(".cart-container");
         if (container && container.offsetHeight > 0) {
-          // Initialize Matter with known container height
           cleanupRef.current = initializeMatter(
             Matter,
-            engineInstance,
+            engine,
             lines,
             container.offsetHeight,
+            sceneRef.current,
           );
           setMatterInitialized(true);
         } else {
-          requestAnimationFrame(checkDOM);
+          requestAnimationFrame(waitForDOM);
         }
       };
-
-      checkDOM();
+      waitForDOM();
     };
 
     init();
@@ -73,14 +69,12 @@ const CartTable = () => {
     };
   }, [lines, matterInitialized]);
 
-  if (lines.length === 0)
+  if (!lines.length)
     return status === "idle" ? <div>No items in cart</div> : null;
 
   return (
     <div id="cart-page-container">
-      <div id="canvas-holster" className="column">
-        <div ref={scene} />
-      </div>
+      <div id="canvas-holster" className="column" ref={sceneRef}></div>
       <div className="cart-container">
         <table className="cart-table">
           <tbody className="product-line">
@@ -117,7 +111,7 @@ const CartTable = () => {
   );
 };
 
-const initializeMatter = (Matter, engineInstance, lines, containerHeight) => {
+const initializeMatter = (Matter, engine, lines, containerHeight, sceneEl) => {
   const { Engine, Render, Runner, World, Bodies, Mouse, MouseConstraint } =
     Matter;
 
@@ -125,8 +119,8 @@ const initializeMatter = (Matter, engineInstance, lines, containerHeight) => {
   const ch = containerHeight;
 
   const render = Render.create({
-    element: document.querySelector("#canvas-holster"),
-    engine: engineInstance,
+    element: sceneEl,
+    engine,
     options: {
       width: cw,
       height: ch,
@@ -135,28 +129,28 @@ const initializeMatter = (Matter, engineInstance, lines, containerHeight) => {
     },
   });
 
-  // Boundaries
-  World.add(engineInstance.world, [
+  // Add boundaries
+  World.add(engine.world, [
     Bodies.rectangle(cw / 2, -10, cw, 20, { isStatic: true }),
     Bodies.rectangle(-10, ch / 2, 20, ch, { isStatic: true }),
     Bodies.rectangle(cw / 2, ch + 10, cw, 20, { isStatic: true }),
     Bodies.rectangle(cw + 10, ch / 2, 20, ch, { isStatic: true }),
   ]);
 
-  Runner.run(engineInstance);
+  Runner.run(engine);
   Render.run(render);
-  engineInstance.world.gravity.y = 0.2;
+  engine.world.gravity.y = 0.2;
 
   const mouse = Mouse.create(render.canvas);
-  const mouseConstraint = MouseConstraint.create(engineInstance, {
+  const mouseConstraint = MouseConstraint.create(engine, {
     mouse,
     constraint: { stiffness: 0.2, render: { visible: false } },
   });
-  World.add(engineInstance.world, mouseConstraint);
+  World.add(engine.world, mouseConstraint);
   render.mouse = mouse;
 
   // Add balls
-  lines.forEach((line, i) => {
+  lines.forEach((line) => {
     const imageUrl = line.merchandise.image.url;
     const ball = Bodies.circle(Math.random() * cw, Math.random() * -20, 70, {
       restitution: 1,
@@ -164,14 +158,14 @@ const initializeMatter = (Matter, engineInstance, lines, containerHeight) => {
       density: 20,
       render: { sprite: { texture: imageUrl, xScale: 0.2, yScale: 0.2 } },
     });
-    World.add(engineInstance.world, ball);
+    World.add(engine.world, ball);
   });
 
-  // Cleanup
+  // Cleanup function
   return () => {
     Render.stop(render);
-    World.clear(engineInstance.world);
-    Engine.clear(engineInstance);
+    World.clear(engine.world);
+    Engine.clear(engine);
     render.canvas.remove();
     render.canvas = null;
     render.context = null;
@@ -199,37 +193,11 @@ const CartLineItem = () => {
       <td>
         <div className="cart-quantity-selector">
           <CartLineQuantityAdjustButton adjust="decrease">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 12h-15"
-              />
-            </svg>
+            -
           </CartLineQuantityAdjustButton>
           <CartLineQuantity />
           <CartLineQuantityAdjustButton adjust="increase">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 4.5v15m7.5-7.5h-15"
-              />
-            </svg>
+            +
           </CartLineQuantityAdjustButton>
         </div>
       </td>

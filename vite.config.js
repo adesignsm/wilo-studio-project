@@ -4,6 +4,7 @@ import hydrogen from "@shopify/hydrogen/plugin";
 export default defineConfig({
   plugins: [hydrogen()],
   ssr: {
+    // Force SSR to treat these packages as ESM and bundle them
     noExternal: [
       "@shopify/hydrogen",
       "three",
@@ -13,21 +14,27 @@ export default defineConfig({
       "jquery",
     ],
   },
+  resolve: {
+    alias: {
+      // Sometimes jQuery needs explicit ESM alias
+      jquery: "jquery/dist/jquery.esm.js",
+    },
+  },
+  define: {
+    // Ensure global variables work in worker
+    global: "globalThis",
+    "process.env": {},
+  },
   server: {
     port: 3000,
     host: true,
   },
-  define: {
-    global: "globalThis",
-  },
-  optimizeDeps: {
-    include: ["matter-js", "jquery"],
-  },
   build: {
-    target: "esnext",
     rollupOptions: {
+      // Entry should be your server entry
       input: "./src/entry-server.jsx",
-      external: [],
     },
+    target: "esnext", // Ensure modern ESM output
+    minify: false, // Optional: helps debug worker issues
   },
 });

@@ -8,7 +8,7 @@ import {
 } from "@shopify/hydrogen";
 import { Suspense } from "react";
 import Layout from "../../components/Layout.server";
-import ProductDetails from "../../components/ProductDetails.client.jsx";
+import ProductDetails from "../../components/ProductDetails.client";
 
 const Product = ({ params }) => {
   const { handle } = useRouteParams(params);

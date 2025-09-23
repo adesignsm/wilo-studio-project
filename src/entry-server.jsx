@@ -1,4 +1,16 @@
-import { renderHydrogen } from "@shopify/hydrogen";
+import { renderToString } from "react-dom/server";
 import App from "./App.server";
+import { ShopifyProvider } from "@shopify/hydrogen";
 
-export default renderHydrogen(App);
+export default function renderHydrogen(
+  request,
+  responseStatusCode,
+  responseHeaders,
+  context,
+) {
+  return renderToString(
+    <ShopifyProvider {...context}>
+      <App />
+    </ShopifyProvider>,
+  );
+}

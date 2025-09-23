@@ -2,58 +2,50 @@
 
 import React, { useState, useEffect } from "react";
 import ingredientData from "../../ingredientconfig.json";
-
 import leftArrow from "../assets/leftArrow.svg";
 import "../styles/ingredients.css";
 
 const Ingredient = () => {
   const [ingredient, setIngredient] = useState("");
+  const [showGoBack, setShowGoBack] = useState(false);
 
   useEffect(() => {
-    const load = async () => {
-      if (typeof window !== "undefined") {
-        const $ = (await import("jquery")).default;
+    if (typeof window === "undefined") return;
 
-        const url = window.location.href;
-        const parsedRL = new URL(url);
-        const pathName = parsedRL.pathname;
+    const parsedURL = new URL(window.location.href);
+    const pathName = parsedURL.pathname;
+    const urlParts = pathName.split("/");
+    const ingredientName = urlParts[urlParts.length - 1];
 
-        const urlParts = pathName.split("/");
-        const ingredientName = urlParts[urlParts.length - 1];
+    setIngredient(ingredientName.replace("-", " "));
 
-        setIngredient(ingredientName.replace("-", " "));
-
-        setTimeout(() => {
-          $(".go-back-container").animate({ opacity: "1" }, 500);
-        }, 1000);
-      }
-    };
-    load();
+    const timeout = setTimeout(() => setShowGoBack(true), 1000);
+    return () => clearTimeout(timeout);
   }, []);
 
-  const handleClick = () => {
-    window.history.back();
-  };
+  const handleClick = () => window.history.back();
+
+  const matchedItem = ingredientData.find(
+    (item) => ingredient.toLowerCase() === item.name,
+  );
 
   return (
-    <>
-      <div id="ingredient-container">
-        <div className="single-ingredient-container">
-          <h1> {ingredient.toUpperCase()} </h1>
-          {ingredientData.map((item) => {
-            if (ingredient.toLowerCase() === item.name) {
-              return <h2 key={item.name}> {item.description} </h2>;
-            }
-          })}
-        </div>
-        <div className="go-back-container" onClick={handleClick}>
-          <div className="go-back-button">
-            <img src={leftArrow} alt="Back arrow" />
-            <p> Back</p>
-          </div>
+    <div id="ingredient-container">
+      <div className="single-ingredient-container">
+        <h1>{ingredient.toUpperCase()}</h1>
+        {matchedItem && <h2>{matchedItem.description}</h2>}
+      </div>
+      <div
+        className="go-back-container"
+        onClick={handleClick}
+        style={{ opacity: showGoBack ? 1 : 0, transition: "opacity 0.5s" }}
+      >
+        <div className="go-back-button">
+          <img src={leftArrow} alt="Back arrow" />
+          <p>Back</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

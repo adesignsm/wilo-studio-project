@@ -16,7 +16,7 @@ import "../styles/cartPage.css";
 
 const CartPage = () => {
   return (
-    <Suspense>
+    <Suspense fallback={null}>
       <CartTable />
     </Suspense>
   );
@@ -30,6 +30,7 @@ const CartTable = () => {
   const [cartProductImages, setCartProductImages] = useState([]);
   const [engine, setEngine] = useState(null);
   const [matterInitialized, setMatterInitialized] = useState(false);
+  const cleanupRef = useRef(null);
 
   useEffect(() => {
     if (
@@ -40,86 +41,37 @@ const CartTable = () => {
       return;
 
     const init = async () => {
-      const $ = (await import("jquery")).default;
       const Matter = await import("matter-js");
       const engineInstance = Matter.Engine.create();
-
       setEngine(engineInstance);
+
       setCartProductImages(lines.map((p) => p.merchandise.image.url));
 
-      // Small delay to ensure DOM elements are rendered
-      setTimeout(() => {
-        const cleanup = initializeMatter($, Matter, engineInstance, lines);
-        setMatterInitialized(true);
+      const checkDOM = () => {
+        const container = document.querySelector(".cart-container");
+        if (container && container.offsetHeight > 0) {
+          // Initialize Matter with known container height
+          cleanupRef.current = initializeMatter(
+            Matter,
+            engineInstance,
+            lines,
+            container.offsetHeight,
+          );
+          setMatterInitialized(true);
+        } else {
+          requestAnimationFrame(checkDOM);
+        }
+      };
 
-        // Optional: cleanup on unmount
-        return () => cleanup();
-      }, 500);
+      checkDOM();
     };
 
     init();
-  }, [lines, matterInitialized]);
 
-  const initializeMatter = ($, Matter, engineInstance, lines) => {
-    const { Engine, Render, Runner, World, Bodies, Mouse, MouseConstraint } =
-      Matter;
-
-    const cw = window.innerWidth / 2;
-    const ch = $(".cart-container").height();
-
-    const render = Render.create({
-      element: scene.current,
-      engine: engineInstance,
-      options: {
-        width: cw,
-        height: ch,
-        wireframes: false,
-        background: "transparent",
-      },
-    });
-
-    // Boundaries
-    World.add(engineInstance.world, [
-      Bodies.rectangle(cw / 2, -10, 0, 20, { isStatic: false }),
-      Bodies.rectangle(-10, ch / 2, 20, ch, { isStatic: true }),
-      Bodies.rectangle(cw / 2, ch + 10, cw, 20, { isStatic: true }),
-      Bodies.rectangle(cw + 10, ch / 2, 20, ch, { isStatic: true }),
-    ]);
-
-    Runner.run(engineInstance);
-    Render.run(render);
-    engineInstance.world.gravity.y = 0.2;
-
-    const mouse = Mouse.create(render.canvas);
-    const mouseConstraint = MouseConstraint.create(engineInstance, {
-      mouse,
-      constraint: { stiffness: 0.2, render: { visible: false } },
-    });
-    World.add(engineInstance.world, mouseConstraint);
-    render.mouse = mouse;
-
-    // Add balls
-    cartProductImages.forEach((imageUrl) => {
-      const ball = Bodies.circle(Math.random() * cw, Math.random() * -20, 70, {
-        restitution: 1,
-        friction: 0,
-        density: 20,
-        render: { sprite: { texture: imageUrl, xScale: 0.2, yScale: 0.2 } },
-      });
-      World.add(engineInstance.world, ball);
-    });
-
-    // Cleanup function
     return () => {
-      Render.stop(render);
-      World.clear(engineInstance.world);
-      Engine.clear(engineInstance);
-      render.canvas.remove();
-      render.canvas = null;
-      render.context = null;
-      render.textures = {};
+      if (cleanupRef.current) cleanupRef.current();
     };
-  };
+  }, [lines, matterInitialized]);
 
   if (lines.length === 0)
     return status === "idle" ? <div>No items in cart</div> : null;
@@ -129,15 +81,107 @@ const CartTable = () => {
       <div id="canvas-holster" className="column">
         <div ref={scene} />
       </div>
-      <div className="cart-container">{/* ...rest of your table code */}</div>
+      <div className="cart-container">
+        <table className="cart-table">
+          <tbody className="product-line">
+            {lines.map((line) => (
+              <CartLineProvider key={line.id} line={line}>
+                <CartLineItem />
+              </CartLineProvider>
+            ))}
+          </tbody>
+        </table>
+        <div className="cart-footer">
+          <tbody className="prices-line">
+            <tr>
+              <td colSpan="2"></td>
+              <td>Sub total:</td>
+              <td>
+                <CartCost withoutTrailingZeros />
+              </td>
+            </tr>
+            <tr>
+              <td colSpan="2"></td>
+              <td>Total:</td>
+              <td>
+                <CartCost withoutTrailingZeros />
+              </td>
+            </tr>
+          </tbody>
+          <Link to={checkoutUrl} className="checkout-button">
+            Checkout
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
 
+const initializeMatter = (Matter, engineInstance, lines, containerHeight) => {
+  const { Engine, Render, Runner, World, Bodies, Mouse, MouseConstraint } =
+    Matter;
+
+  const cw = window.innerWidth / 2;
+  const ch = containerHeight;
+
+  const render = Render.create({
+    element: document.querySelector("#canvas-holster"),
+    engine: engineInstance,
+    options: {
+      width: cw,
+      height: ch,
+      wireframes: false,
+      background: "transparent",
+    },
+  });
+
+  // Boundaries
+  World.add(engineInstance.world, [
+    Bodies.rectangle(cw / 2, -10, cw, 20, { isStatic: true }),
+    Bodies.rectangle(-10, ch / 2, 20, ch, { isStatic: true }),
+    Bodies.rectangle(cw / 2, ch + 10, cw, 20, { isStatic: true }),
+    Bodies.rectangle(cw + 10, ch / 2, 20, ch, { isStatic: true }),
+  ]);
+
+  Runner.run(engineInstance);
+  Render.run(render);
+  engineInstance.world.gravity.y = 0.2;
+
+  const mouse = Mouse.create(render.canvas);
+  const mouseConstraint = MouseConstraint.create(engineInstance, {
+    mouse,
+    constraint: { stiffness: 0.2, render: { visible: false } },
+  });
+  World.add(engineInstance.world, mouseConstraint);
+  render.mouse = mouse;
+
+  // Add balls
+  lines.forEach((line, i) => {
+    const imageUrl = line.merchandise.image.url;
+    const ball = Bodies.circle(Math.random() * cw, Math.random() * -20, 70, {
+      restitution: 1,
+      friction: 0,
+      density: 20,
+      render: { sprite: { texture: imageUrl, xScale: 0.2, yScale: 0.2 } },
+    });
+    World.add(engineInstance.world, ball);
+  });
+
+  // Cleanup
+  return () => {
+    Render.stop(render);
+    World.clear(engineInstance.world);
+    Engine.clear(engineInstance);
+    render.canvas.remove();
+    render.canvas = null;
+    render.context = null;
+    render.textures = {};
+  };
+};
+
 const CartLineItem = () => {
   const { lineId, merchandise, cost } = useCartLine();
-
-  const { image, product, selectedOptions } = merchandise;
+  const { image, product } = merchandise;
 
   return (
     <tr key={lineId}>
@@ -195,20 +239,7 @@ const CartLineItem = () => {
           className="cart-remove"
           adjust="remove"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-            />
-          </svg>
+          Remove
         </CartLineQuantityAdjustButton>
       </td>
       <td>

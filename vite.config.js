@@ -11,6 +11,8 @@ export default defineConfig({
     global: "globalThis",
   },
   build: {
-    target: "esnext",
+    rollupOptions: {
+      input: "./src/entry-server.jsx",
+    },
   },
 });

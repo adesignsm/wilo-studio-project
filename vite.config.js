@@ -4,7 +4,14 @@ import hydrogen from "@shopify/hydrogen/plugin";
 export default defineConfig({
   plugins: [hydrogen()],
   ssr: {
-    noExternal: ["@shopify/hydrogen"],
+    noExternal: [
+      "@shopify/hydrogen",
+      "jquery",
+      "matter-js",
+      "three",
+      "@react-three/fiber",
+      "@react-three/drei",
+    ],
   },
   server: {
     port: 3000,

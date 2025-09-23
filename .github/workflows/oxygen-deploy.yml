@@ -37,8 +37,8 @@ jobs:
       - name: Install legacy Hydrogen CLI
         run: npm install -g @shopify/cli-hydrogen@1.0.0
 
-      - name: Add npm global binaries to PATH
-        run: echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
+      - name: Add npm global bin to PATH
+        run: echo "$(npm bin -g)" >> $GITHUB_PATH
 
       - name: Build and Publish to Oxygen
         run: shopify hydrogen deploy

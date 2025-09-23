@@ -13,7 +13,6 @@ export default defineConfig({
       "jquery",
     ],
   },
-
   server: {
     port: 3000,
     host: true,
@@ -21,9 +20,14 @@ export default defineConfig({
   define: {
     global: "globalThis",
   },
+  optimizeDeps: {
+    include: ["matter-js", "jquery"],
+  },
   build: {
+    target: "esnext",
     rollupOptions: {
       input: "./src/entry-server.jsx",
+      external: [],
     },
   },
 });
